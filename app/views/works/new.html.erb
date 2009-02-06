@@ -1,0 +1,46 @@
+<h1>New Work</h1>
+
+<% form_for(@work, :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label 'is this an earlier work?' %><br />
+    <%= f.check_box :is_early %>
+  </p>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :venue %><br />
+    <%= f.text_area :venue, :rows => 3 %>
+  </p>
+  <p>
+    <%= f.label :date_start %><br />
+    <%= f.date_select :date_start, :discard_day => true, :discard_month => true, :start_year => 1996, :end_year => Time.now.year %>
+  </p>
+  <p>
+    <%= f.label :date_end %><br />
+    <%= f.date_select :date_end, :discard_day => true, :discard_month => true, :start_year => 1996, :end_year => Time.now.year, :include_blank => true %>
+  </p>
+  <p>
+    <%= f.label :is_ongoing %><br />
+    <%= f.check_box :is_ongoing %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <% fields_for :work_thumbnail do |t| %>
+		<%= t.error_messages %>
+	  <p>
+	    <%= t.label 'Thumbnail' %><br />
+	    <%= t.file_field :uploaded_data %>
+	  </p>
+  <% end %>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', works_path %>

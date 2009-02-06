@@ -1,0 +1,31 @@
+<% form_for([@article_list, @article_list_item], :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+  <%= hidden_field_tag :page_section_id, @page_section.id %>
+
+  <p>
+    <%= f.label 'Display Text' %><br />
+    <%= f.text_area :output, :rows => 2 %>
+  </p>
+  <p>
+    <%= f.label 'Links to somewhere else?' %><br />
+    <%= f.check_box :is_link %>
+  </p>
+  <p>
+    <%= f.label 'URL (if link):' %><br />
+    <%= f.text_field :url %>
+  </p>
+  <% fields_for :article do |a| %>
+	<%= a.error_messages %>
+  <p>
+    <%= a.label 'Article Image' %><br />
+    <%= a.file_field :uploaded_data %>
+  </p>
+  <p>
+    <%= a.label 'ALT text' %><br />
+    <%= a.text_field :alt_text %>
+  </p>
+  <% end %>
+  <p>
+    <%= f.submit "Update" %> or <%= link_to 'cancel', site_section_page_url(@site_section,@page), :onclick => "this.up('div').update('');return false;" %>
+  </p>
+<% end %>

@@ -1,0 +1,6 @@
+<% if @page %>
+	<%= render :partial => 'pages/show', :locals => { :page => @page } %>
+<% else %>
+	<h1>You need to <%= link_to 'add a page', new_site_section_page_path(@site_section), :style => 'text-decoration: underline;' %> to this section</h1>
+<% end %>
+

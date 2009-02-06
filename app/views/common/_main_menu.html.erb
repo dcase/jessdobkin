@@ -1,0 +1,26 @@
+<h2 class="hidden">Main Menu</h2>
+<% if authorized? %>
+	<%= link_to image_tag("add.png", :size => "16x16"), new_site_section_path %>
+	<%= link_to "Add section to site", new_site_section_path %>
+<% end %>
+<ul id="mainmenu">
+<% for site_section in @site_sections %>
+	<% if site_section.in_menu? or authorized? %>
+		<% content_tag_for(:li, site_section) do %>
+			<% if authorized? %>
+				<%= image_tag("drag_handle.png", :size => "16x16", :class => "site_section_drag_handle") %>
+				<%= link_to ( image_tag("pencil.png", :size => "16x16"), edit_site_section_path(site_section), {:title => "Edit"}) %>
+				<%= link_to ( image_tag("fail.png", :size => "16x16"), { :controller => 'site_sections', :action => 'destroy', :id => site_section }, { :confirm => 'Are you sure?', :method => :delete, :title => "Delete"} ) %>
+			<% end %>
+			<% if site_section.is_external? %>
+				<%= link_to site_section.name, {}, :href => site_section.url, :target => "_blank" %>
+			<% elsif site_section.controller.blank? %>
+				<%= link_to site_section.name, { :controller => 'pages', :action => 'show', :id => site_section.pages.first, :site_section_id => site_section }, :class => ( @site_section == site_section ? "active" : "inactive" ) %>
+			<% else %>
+				<%= link_to site_section.name, { :controller => site_section.controller , :action => site_section.action } , :class => ( site_section.controller == params[:controller] ? "active" : "inactive" ) %>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
+</ul>
+<%= sortable_element("mainmenu", :url => { :controller => 'site_sections', :action => 'order' }, :handle => 'site_section_drag_handle' ) if authorized? %>

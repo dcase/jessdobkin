@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  position: 1
+  has_scroll: false
+  content: 
+
+two:
+  title: MyString
+  position: 1
+  has_scroll: false
+  content: 

@@ -1,0 +1,24 @@
+<h1>Listing site_sections</h1>
+
+<ul>
+<% for site_section in @site_sections %>
+
+	<% content_tag_for(:li, site_section) do %>
+		<% if site_section.is_external? %>
+			<%= link_to site_section.name, {}, :href => site_section.url, :target => "_blank" %>
+		<% elsif site_section.controller.blank? %>
+			<%= link_to site_section.name, :controller => 'site_sections', :action => 'show_home', :id => site_section %>
+		<% else %>
+			<%= link_to site_section.name, :controller => site_section.controller , :action => site_section.action %>
+		<% end %>
+	    <%= link_to 'Show', site_section %>
+	    <%= link_to 'Edit', edit_site_section_path(site_section) %>
+	    <%= link_to 'Destroy', site_section, :confirm => 'Are you sure?', :method => :delete %>
+		<%= link_to 'Show Pages', site_section_pages_path(site_section) unless site_section.is_external? || site_section.pages.count == 0 %>
+	<% end %>
+
+<% end %>
+</ul>
+<br />
+
+<%= link_to 'New site_section', new_site_section_path %>

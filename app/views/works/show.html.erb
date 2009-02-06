@@ -1,0 +1,77 @@
+<% content_for :container_class_modifier do %>-work<% end %>
+<div id="work_photo_wrapper">
+	<% unless @work.photos.blank? %>
+		<% if authorized? %>
+			<h3>photos:</h3>
+			<div id="work_thumbs_wrapper">
+				<% for item in @work.work_photos %>
+					<% div_for(item) do %>
+						<div><%= image_tag(item.photo.public_filename(:thumb)) %><%= link_to( image_tag("fail.png", :size => "16x16", :class => 'photo-destroy'), { :controller => 'work_photos', :action => 'destroy', :id => item, :work_id => @work }, {:confirm => 'Are you sure?', :method => :delete, :title => "Delete"}) %></div>
+					<% end %>
+				<% end %>
+			</div>
+			<%= sortable_element("work_thumbs_wrapper", :url => { :controller => 'work_photos', :action => 'order'}, :tag => 'div' ) %>
+			<div id="add_photo_container"></div>
+		<% else %>
+			<div id="work_photo"><%= image_tag @work.photos.first.public_filename, :alt => @work.title %></div>
+			<% unless @work.photos.count < 2 %>
+				<div id="work_photos_links">
+					<ul id="photo_link_list">
+						<% @work.photos.each_with_index do |item, i| %>
+							<% content_tag_for (:li, item) do %>
+								<% if i==0 then link_class = "active" else link_class = "inactive" end %>
+								<%= link_to_function i+1, :id => "link#{i+1}", :class => link_class do |page|
+								 	page.replace_html('work_photo', image_tag(item.public_filename))
+									page.select('#work_photos_links a').each do |link| link.removeClassName('active') end
+									page["link#{i+1}"].addClassName('active')
+									page.replace_html('work_photo_credit', item.credit)
+								end %>
+							<% end %>
+						<% end %>
+						</ul>
+					<%= link_to 'Back', works_path %>
+				</div>
+			<% else %>
+				<div id="work_photos_links">
+					<%= link_to 'Back', works_path %>
+				</div>
+			<% end %>
+		<% end %>
+	<% else %>
+		<div id="add_photo_container"></div>
+	<% end %>
+</div>
+<div id="work_details">
+	<h3><%=h @work.title %></h3>
+	<div id="venue_date">
+		<%=h @work.venue %>
+		<br />
+		<%= @work.date_start.year %><%= if @work.is_ongoing then "-ongoing" elsif !@work.date_end.blank? then "-" + @work.date_end.year.to_s end %>
+	</div>
+	<div id="description">
+		<%=h @work.description %>
+	</div>
+	<% unless @work.photos.empty? %>
+		<div id="credits">
+			<p>photo: <span id="work_photo_credit"><%= @work.photos.first.credit %></span></p>
+		</div>
+	<% end %>
+	<% unless @work.video.blank? %>
+		<div id="video_link">
+			<%= link_to 'watch video', video_path(@work.video) %>
+		</div>
+	<% end %>
+</div>
+
+<% content_for :admin_toolbar do %>
+	<% if authorized? %>
+		<li><%= image_tag 'pencil.png', :size => "16x16", :alt => 'Edit Work' %><%= link_to 'Edit Work', edit_work_path(@work) %></li>
+		<li><%= image_tag 'fail.png', :size => "16x16", :alt => 'Delete Work' %><%= link_to 'Delete Work', @work, :confirm => 'Are you sure?', :method => :delete %></li>
+		<li><%= image_tag 'add.png', :size => "16x16", :alt => 'Add Photo' %><%= link_to_function 'Add Photo' do |page| page.replace_html( 'add_photo_container', :partial => 'add_photo', :object => @work) end %></li>
+	<% end %>
+	<% if authorized_preview? %>
+		<li><%= image_tag 'fail.png', :size => "16x16" %><%= link_to 'Turn off preview', :controller => 'works', :action => 'show', :id => @work %></li>
+	<% elsif authorized? %>
+		<li><%= image_tag 'preview.png', :size => "16x16" %><%= link_to 'Preview Page', :controller => 'works', :action => 'show', :id => @work, :admin => 'false' %></li>
+	<% end %>
+<% end %>

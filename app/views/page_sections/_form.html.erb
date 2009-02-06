@@ -1,0 +1,24 @@
+<% form_for(@page_section) do |f| %>
+  <%= f.error_messages %>
+  <%= hidden_field_tag :page_id, params[:page_id] %>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :position %><br />
+    <%= f.text_field :position %>
+  </p>
+  <p>
+    <%= f.label :has_scroll %><br />
+    <%= f.check_box :has_scroll %>
+  </p>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_field :content %>
+  </p>
+  <p>
+    <%= f.submit "Submit" %>
+  </p>
+<% end %>
+<div id="add-content-wrapper"></div>

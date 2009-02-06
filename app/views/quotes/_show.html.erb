@@ -1,0 +1,18 @@
+<% if authorized? %>
+	<%= link_to( image_tag("fail.png", :size => "16x16"), { :controller => 'quotes', :action => 'destroy', :id => @quote, :page_section_id => @page_section}, {:confirm => 'Are you sure?', :method => :delete, :title => "Delete"}) %>
+	<%= link_to( 'delete quote', { :controller => 'quotes', :action => 'destroy', :id => @quote, :page_section_id => @page_section}, {:confirm => 'Are you sure?', :method => :delete, :title => "Delete"}) %>
+	<br />
+	<%= in_place_editor_field :quote, 'output', { }, { :rows => 5, :url => { :controller => 'quotes', :action => 'set_quote_output', :id => @quote }  } %>
+	<p>
+	  <strong><%= in_place_editor_field :quote, 'author', { }, { :url => { :controller => 'quotes', :action => 'set_quote_author', :id => @quote }  } %></strong>
+	  <em><%= in_place_editor_field :quote, 'source', { }, { :url => { :controller => 'quotes', :action => 'set_quote_source', :id => @quote }  } %></em>
+	</p>
+<% else %>
+
+<%= simple_format(@quote.output) %>
+
+<p>
+  <strong><%=h @quote.author %></strong>
+  <em><%=h @quote.source %></em>
+</p>
+<% end %>

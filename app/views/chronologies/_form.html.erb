@@ -1,0 +1,13 @@
+<% form_for(@chronology) do |f| %>
+  <%= f.error_messages %>
+
+  <%= render :partial => 'page_sections/form_include'%>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit "Submit" %>
+  </p>
+<% end %>

@@ -1,0 +1,21 @@
+<% form_for(@graphic, :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+
+  <%= render :partial => 'page_sections/form_include'%>
+
+  <p>
+    <%= f.label 'Image' %><br />
+    <%= f.file_field :uploaded_data %>
+  </p>
+  <p>
+    <%= f.label :alt_text %><br />
+    <%= f.text_field :alt_text %>
+  </p>
+  <p>
+    <%= f.label :class_name %><br />
+    <%= f.text_field :class_name %>
+  </p>
+  <p>
+    <%= f.submit "Submit" %>
+  </p>
+<% end %>

@@ -1,0 +1,8 @@
+<h1>Editing Article List Item</h1>
+
+<p>
+  <b>Current Article:</b>
+  <%= image_tag @article_list_item.article.public_filename(:thumb), :alt => @article_list_item.article.alt_text %>
+</p>
+
+<%= render :partial => 'form' %>

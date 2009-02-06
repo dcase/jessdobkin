@@ -1,0 +1,23 @@
+<% div_for(@page_section, :class => (@page_section.content_type.downcase + "-" + @page_section.id.to_s)) do %>
+	<% if @page_section.has_scroll? %>
+		<div id="scroll_page_section_<%= @page_section.id %>">
+	<% end %>
+		<%= image_tag("drag_handle.png", :size => "16x16", :class => "page_section_drag_handle") + " change page section order<br />" if authorized? %>
+		<% if authorized? and @page_section.has_scroll? %>
+			<div><%= link_to_function "show all" do |page| 
+						page['scroll_page_section_'+@page_section.id.to_s].set_style({:overflow => 'visible'}) 
+					end %> | 
+				<%= link_to_function "hide overflow" do |page| 
+							page['scroll_page_section_'+@page_section.id.to_s].set_style({:overflow => 'hidden'})
+						end %>
+			</div>
+		<% end %>
+		<% if @page_section.show_title? %>
+			<h3><%=h @page_section.title %></h3>
+		<% end %>
+		<%= render :partial => 'common/content_switch', :locals => { :page => @page, :page_section => @page_section } %>
+	<% if @page_section.has_scroll? %>
+		</div>
+	<% end %>
+	<%= render :partial => 'common/scroll', :locals => { :page_section => @page_section, :for_section => (@for_section = true) } if @page_section.has_scroll? %>
+<% end %>

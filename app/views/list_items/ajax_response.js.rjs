@@ -1,0 +1,4 @@
+page.replace_html("page_section_#{@page_section.id}", 
+  :partial => 'lists/show', 
+  :locals => { :list => @list, :page_section => @page_section })
+flash.discard

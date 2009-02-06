@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  date_filmed: 2009-02-06 10:34:10
+  description: MyText
+  credit: MyString
+  position: 1
+  video_file: 
+
+two:
+  title: MyString
+  date_filmed: 2009-02-06 10:34:10
+  description: MyText
+  credit: MyString
+  position: 1
+  video_file: 

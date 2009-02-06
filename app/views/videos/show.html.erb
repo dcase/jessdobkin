@@ -1,0 +1,33 @@
+<p>
+  <b>Title:</b>
+  <%=h @video.title %>
+</p>
+
+<p>
+  <b>Date filmed:</b>
+  <%=h @video.date_filmed %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @video.description %>
+</p>
+
+<p>
+  <b>Credit:</b>
+  <%=h @video.credit %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%=h @video.position %>
+</p>
+
+<p>
+  <b>Video file:</b>
+  <%=h @video.video_file %>
+</p>
+
+
+<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', videos_path %>

@@ -1,0 +1,18 @@
+<p>
+  <b>Output:</b>
+  <%=h @list_item.output %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%=h @list_item.position %>
+</p>
+
+<p>
+  <b>List:</b>
+  <%=h @list_item.list %>
+</p>
+
+
+<%= link_to 'Edit', edit_list_list_item_path(@list,@list_item) %> |
+<%= link_to 'Back', list_list_items_path(@list) %>

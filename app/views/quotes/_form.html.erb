@@ -1,0 +1,20 @@
+<% remote_form_for([@quote_list,@quote]) do |f| %>
+  <%= f.error_messages %>
+  <%= hidden_field_tag :page_section_id, @page_section.id %>
+
+  <p>
+    <%= f.label 'Quote Text' %><br />
+    <%= f.text_area :output, :rows => 5 %>
+  </p>
+  <p>
+    <%= f.label :author %><br />
+    <%= f.text_field :author %>
+  </p>
+  <p>
+    <%= f.label :source %><br />
+    <%= f.text_field :source %>
+  </p>
+  <p>
+    <%= f.submit "Submit" %>
+  </p>
+<% end %>

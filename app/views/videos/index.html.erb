@@ -1,0 +1,30 @@
+<h1>Listing videos</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Date filmed</th>
+    <th>Description</th>
+    <th>Credit</th>
+    <th>Position</th>
+    <th>Video file</th>
+  </tr>
+
+<% for video in @videos %>
+  <tr>
+    <td><%=h video.title %></td>
+    <td><%=h video.date_filmed %></td>
+    <td><%=h video.description %></td>
+    <td><%=h video.credit %></td>
+    <td><%=h video.position %></td>
+    <td><%=h video.video_file %></td>
+    <td><%= link_to 'Show', video %></td>
+    <td><%= link_to 'Edit', edit_video_path(video) %></td>
+    <td><%= link_to 'Destroy', video, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New video', new_video_path %>

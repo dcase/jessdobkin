@@ -1,0 +1,24 @@
+<% remote_form_for([@chronology,@chronology_item]) do |f| %>
+  <%= f.error_messages %>
+  <%= hidden_field_tag :page_section_id, @page_section.id %>
+  
+  <p>
+    <%= f.label 'Year or Year Started' %><br />
+    <%= f.date_select :time_start, :discard_day => true, :discard_month => true, :start_year => 1996, :end_year => Time.now.year %>
+  </p>
+  <p>
+    <%= f.label 'Year Ended (optional)' %><br />
+    <%= f.date_select :time_end, :discard_day => true, :discard_month => true, :start_year => 1996, :end_year => Time.now.year, :include_blank => true %>
+  </p>
+  <p>
+	<%= f.label 'or, to present?'%>
+	<%= f.check_box :to_present %>
+  </p>
+  <p>
+    <%= f.label :output %><br />
+    <%= f.text_area :output, :rows => 3, :cols => 50 %>
+  </p>
+  <p>
+    <%= f.submit "Submit" %> or <%= link_to 'cancel', site_section_page_url(@site_section,@page), :onclick => "this.up('div').update('');return false;" %>
+  </p>
+<% end %>

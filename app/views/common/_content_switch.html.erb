@@ -1,0 +1,27 @@
+<%= case @page_section.content_type
+	when "CopyText"
+		@copy_text = @page_section.content
+		render :partial => 'copy_texts/show', :locals => { :copy_text => @copy_text, :page_section => @page_section }
+	when "Chronology"
+		@chronology = @page_section.content
+		render :partial => 'chronologies/show', :locals => { :chronology => @chronology, :page_section => @page_section }
+	when "List"
+		@list = @page_section.content
+		render :partial => 'lists/show', :locals => { :list => @list, :page_section => @page_section }
+	when "Quote"
+		@quote = @page_section.content
+		render :partial => 'quotes/show', :locals => { :quote => @quote, :page_section => @page_section }
+	when "Media"
+		@graphic = @page_section.content
+		render :partial => 'graphics/show', :locals => { :graphic => @graphic, :page_section => @page_section }
+	when "ArticleList"
+		@article_list = @page_section.content
+		render :partial => 'article_lists/show', :locals => { :article_list => @article_list, :page_section => @page_section }
+	when "QuoteList"
+		@quote_list = @page_section.content
+		render :partial => 'quote_lists/show', :locals => { :quote_list => @quote_list, :page_section => @page_section }
+	else
+		"<h1>did not work</h1>"
+end %>
+
+				

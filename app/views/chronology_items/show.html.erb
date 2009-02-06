@@ -1,0 +1,13 @@
+<p>
+  <b>Output:</b>
+  <%=h @chronology_item.output %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%=h @chronology_item.year %>
+</p>
+
+
+<%= link_to 'Edit', edit_chronology_chronology_item_path(@chronology,@chronology_item) %> |
+<%= link_to 'Back', chronology_chronology_items_path(@chronology) %>

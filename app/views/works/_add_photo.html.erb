@@ -1,0 +1,17 @@
+<h3>Add Photo:</h3>
+<% form_for(@work, :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+  <% fields_for :photo do |p| %>
+	<%= p.error_messages %>
+  	  <p>
+	    <%= p.file_field :uploaded_data %>
+	  </p>
+	  <p>
+		<%= p.label :credit %><br />
+		<%= p.text_field :credit %>
+	  </p>
+  <% end %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>

@@ -1,0 +1,13 @@
+<p>
+  <b>Output:</b>
+  <%=h @article_list_item.output %>
+</p>
+
+<p>
+  <b>Article:</b>
+  <%= image_tag @article_list_item.article.public_filename(:thumb), :alt => @article_list_item.article.alt_text %>
+</p>
+
+
+<%= link_to 'Edit', edit_article_list_article_list_item_path(@article_list, @article_list_item) %> |
+<%= link_to 'Back', article_list_article_list_items_path(@article_list) %>

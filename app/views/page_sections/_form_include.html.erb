@@ -1,0 +1,21 @@
+<% fields_for :page_section do |page| %>
+  <%= page.error_messages %>
+  <%= page.hidden_field :page_id, :value => params[:page_id] %>
+  <%= page.hidden_field :id %>
+  <p>
+    <%= page.label 'Section Title' %><br />
+    <%= page.text_field :title %>
+  </p>
+  <p>
+    <%= page.label 'should the section title display?' %><br />
+    <%= page.check_box :show_title %>
+  </p>
+  <p>
+    <%= page.label 'should this section scroll?' %><br />
+    <%= page.check_box :has_scroll %>
+  </p>
+  <p>
+    <%= page.label 'scroll window height (pixels)?' %><br />
+    <%= page.text_field :scroll_height %>
+  </p>
+<% end %>

@@ -1,0 +1,23 @@
+<% form_for([@site_section, @page]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label 'Name (will be used for link):' %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label 'should all page content scroll together?' %><br />
+    <%= f.check_box :has_scroll %>
+  </p>
+  <p>
+    <%= f.label 'scroll window height (pixels)?' %><br />
+    <%= f.text_field :scroll_height %>
+  </p>
+  <p>
+    <%= f.label :callout %><br />
+    <%= f.text_area :callout, :rows => 5, :cols => 15 %>
+  </p>
+  <p>
+    <%= f.submit "Submit" %>
+  </p>
+<% end %>

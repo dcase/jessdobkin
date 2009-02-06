@@ -1,0 +1,20 @@
+<h2 class="hidden">Page Menu</h2>
+<% if authorized? %>
+	<%= link_to image_tag("add.png", :size => "16x16"), new_site_section_page_path(@site_section) %>
+	<%= link_to "Add page to this section", new_site_section_page_path(@site_section) %>
+<% end %>
+<% if @site_section.pages.count > 1 || authorized? %>
+	<ul id="pagemenu">
+	<% for page in @site_section.pages %>
+		<% content_tag_for(:li, page) do %>
+			<% if authorized? %>
+				<%= image_tag("drag_handle.png", :size => "16x16", :class => "page_drag_handle") %>
+				<%= link_to(image_tag("pencil.png", :size => "16x16"), edit_site_section_page_path(@site_section, page), {:title => "Edit"}) %>
+				<%= link_to(image_tag("fail.png", :size => "16x16"), site_section_page_path(@site_section, page), { :confirm => 'Are you sure?', :method => :delete, :title => "Delete"} ) %>
+			<% end %>
+			<%= link_to page.name, site_section_page_path(@site_section, page), :class => ( @page == page ? "active" : "inactive" ) %>
+		<% end %>
+	<% end %>
+	</ul>
+	<%= sortable_element("pagemenu", :url => { :controller => 'pages', :action => 'order' }, :handle => 'page_drag_handle' ) if authorized? %>
+<% end %>

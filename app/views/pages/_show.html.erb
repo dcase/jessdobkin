@@ -1,0 +1,55 @@
+<% content_for :body_class do %><%= @site_section.name.gsub(/['" ]/, '') %>-<%= @page.name.gsub(/['" ]/, '') %><% end %>
+<% content_for :callout do %>
+	<% if authorized? %>
+		<input type="button" id="edit_callout" value="edit or add text" style="position: relative; top: -15px; left: -20px;" /><br />
+		<%= in_place_editor_field :page, 'callout', { }, { :external_control => "edit_callout", :rows => 5, :cols => 15, :url => { :controller => 'pages', :action => 'set_page_callout', :id => @page }  } %>
+	<% else %>
+		<%= textilize(@page.callout) %>
+	<% end %>
+<% end %>
+<div id="header">
+	<% if authorized? %>
+		<h1>Site Section: <%= @site_section.name %></h1>
+		<h2>Page: <%= @page.name %></h2>
+	<% else %>
+		<h1 class="hidden"><%= @site_section.name %></h1>
+		<h2 class="hidden"><%= @page.name %></h2>
+	<% end %>
+	<%= render :partial => 'pages/menu', :locals => { :page => @page, :site_section => @site_section } %>
+</div>
+<div id="content">
+	<div id="page_sections_container">
+		<% @page_sections = @page.page_sections %>
+		<% for @page_section in @page_sections %>
+			<%= render :partial => 'page_sections/show', :locals => { :page_section => @page_section } %>
+		<% end %>
+	</div>
+	<%= render :partial => 'common/scroll', :locals => { :page => @page, :for_section => (@for_section = false) } if @page.has_scroll? %>
+	<%= sortable_element("page_sections_container", :url => { :controller => 'page_sections', :action => 'order' }, :tag => :div, :handle => 'page_section_drag_handle'  ) if authorized? %>
+</div>
+
+	<% content_for :admin_toolbar do %>
+		<% if authorized? %>
+			<li><%= image_tag 'add.png', :size => "16x16" %><%= link_to 'Add Text Content', :controller => 'copy_texts', :action => 'new', :page_id => @page %></li>
+			<li><%= image_tag 'add.png', :size => "16x16" %><%= link_to 'Add Chronology', :controller => 'chronologies', :action => 'new', :page_id => @page %></li>
+			<li><%= image_tag 'add.png', :size => "16x16" %><%= link_to 'Add List', :controller => 'lists', :action => 'new', :page_id => @page %></li>
+			<li><%= image_tag 'add.png', :size => "16x16" %><%= link_to 'Add Quote List', :controller => 'quote_lists', :action => 'new', :page_id => @page %></li>
+			<li><%= image_tag 'add.png', :size => "16x16" %><%= link_to 'Add Graphic', :controller => 'graphics', :action => 'new', :page_id => @page %></li>
+			<li><%= image_tag 'add.png', :size => "16x16" %><%= link_to 'Add Article List', :controller => 'article_lists', :action => 'new', :page_id => @page %></li>
+			<li>
+				<% if authorized? and @page.has_scroll? %>
+					Page Scroll: <%= link_to_function "off" do |page| 
+									page['page_sections_container'].set_style({:overflow => 'visible'}) 
+								end %> | 
+								<%= link_to_function "on" do |page| 
+									page['page_sections_container'].set_style({:overflow => 'hidden'})
+								end %>
+				<% end %>
+			</li>
+		<% end %>
+		<% if authorized_preview? %>
+			<li><%= image_tag 'fail.png', :size => "16x16" %><%= link_to 'Turn off preview', :controller => 'pages', :action => 'show', :id => @page, :site_section_id => @site_section %></li>
+		<% elsif authorized? %>
+			<li><%= image_tag 'preview.png', :size => "16x16" %><%= link_to 'Preview Page', :controller => 'pages', :action => 'show', :id => @page, :site_section_id => @site_section, :admin => 'false' %></li>
+		<% end %>
+	<% end %>

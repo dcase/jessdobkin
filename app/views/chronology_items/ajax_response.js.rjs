@@ -1,0 +1,4 @@
+page.replace_html("page_section_#{@page_section.id}", 
+  :partial => 'chronologies/show', 
+  :locals => { :chronology => @chronology, :page_section => @page_section })
+flash.discard

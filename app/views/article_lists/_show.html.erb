@@ -1,0 +1,28 @@
+<% if authorized? %>
+	<%= link_to( image_tag("fail.png", :size => "16x16"), { :controller => 'article_lists', :action => 'destroy', :id => @article_list, :page_section_id => @page_section}, {:confirm => 'Are you sure?', :method => :delete, :title => "Delete"}) %>
+	<%= link_to( 'delete article list', { :controller => 'article_lists', :action => 'destroy', :id => @article_list, :page_section_id => @page_section}, {:confirm => 'Are you sure?', :method => :delete, :title => "Delete"}) %>
+	<br />
+	<%= link_to( image_tag("pencil.png", :size => "16x16"), { :controller => 'article_lists', :action => 'edit', :id => @article_list, :page_section_id => @page_section}, {:title => "Edit"}) %>
+	<%= link_to( 'edit article list', { :controller => 'article_lists', :action => 'edit', :id => @article_list, :page_section_id => @page_section}, {:title => "Edit"}) %>
+	<br />
+	<%= link_to_remote image_tag("add.png", :size => "16x16"), :url => { :controller => 'article_list_items', :action => 'new', :article_list_id => @article_list, :page_section_id => @page_section }, :method => :get, :update => "article_list_item_form_container" %>
+	<%= link_to_remote "Add item", :url => { :controller => 'article_list_items', :action => 'new', :article_list_id => @article_list, :page_section_id => @page_section }, :method => :get, :update => "article_list_item_form_container" %>
+	<div id="article_list_item_form_container"></div>
+<% end %>
+<% content_tag_for(:ul, @article_list) do %>
+	<% for item in @article_list.article_list_items %>
+		<% content_tag_for(:li, item) do %>
+			<% if authorized? %>
+				<%= image_tag("drag_handle.png", :size => "16x16", :class => "article_list_item_drag_handle") %>
+				<%= link_to_remote( image_tag("pencil.png", :size => "16x16"), :url => { :controller => 'article_list_items', :action => 'edit', :id => item, :article_list_id => @article_list, :page_section_id => @page_section  }, :method => :get, :title => "Edit", :update => "article_list_item_form_container" ) %>
+				<%= link_to_remote( image_tag("fail.png", :size => "16x16"), :url => { :controller => 'article_list_items', :action => 'destroy', :id => item, :article_list_id => @article_list, :page_section_id => @page_section  }, :confirm => 'Are you sure?', :method => :delete, :title => "Delete" ) %>
+			<% end %>
+			<% if item.is_link? %>
+				<%= link_to h(item.output), {}, :href => item.url, :target => "_blank" %>
+			<% else %>
+				<%= link_to h(item.output), item.article.public_filename, :rel => "lightbox[articles]" %>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
+<%= sortable_element("article_list_#{@article_list.id}", :url => { :controller => 'article_list_items', :action => 'order', :article_list_id => @article_list.id }, :handle => 'article_list_item_drag_handle' ) if authorized? %>

@@ -1,0 +1,545 @@
+/**********************
+**
+** COMMAND C design
+** info at commandc dot com
+**
+***********************/
+
+/*****************
+* General
+******************/
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+img {
+	border: 0;
+	vertical-align: bottom;
+}
+.in_place_editor_field {
+	overflow: auto;
+}
+.page_section {
+	clear: left;
+	padding: 10px 0;
+}
+.page_section h3 {
+	margin: 10px 0;
+}
+
+/*****************
+* Layout
+******************/
+
+body {
+	background: #fff;
+	color: #666;
+	font-size: 12px;
+	font-family: arial,helvetica,clean,sans-serif;
+	line-height: 133%;
+	text-align: center;
+	position: relative;
+}
+
+div#container {
+	margin: 0 auto 26px auto;
+	padding-top: 10px;
+	width: 898px;
+	min-height: 538px;
+	position: relative;
+	
+}
+div#sidebar {
+	width: 126px;
+	min-height: 519px;
+	padding: 20px 25px 0 25px;
+	background: #fff;
+	text-align: left;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+div#sidebar div#middle {
+	padding: 30px 0;
+	margin: 30px 0;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+div#page-container {
+	margin-left: 180px;
+	padding: 35px 15px 0 90px;
+	text-align: left;
+}
+div#page-container-work {
+	margin-left: 180px;
+	padding: 35px 15px 0 15px;
+	text-align: left;
+}
+div#content {
+	position: relative;
+}
+div#header {
+	min-height: 61px;
+}
+div#footer {
+	font-size: 10px;
+	color: #999;
+	clear: both;
+}
+
+/** Home page **/
+
+.home-home div#container {
+	margin-top: 38px;
+}
+.home-home div#sidebar {
+	position: absolute;
+	top: 0;
+	left: 140px;
+}
+.home-home div#page-container {
+	margin-left: 320px;
+}
+
+/*****************
+* Common Elements
+******************/
+
+.scroll_buttons {
+	width: 15px;
+}
+.scroll_buttons img {
+	margin-bottom: 6px;
+	cursor: pointer;
+}
+
+/*****************
+* Backgrounds
+******************/
+
+.home-home .homebg1 {
+	background: url(../images/homebg1.jpg) no-repeat;
+}
+.home-home .homebg2 {
+	background: url(../images/homebg2.jpg) no-repeat;
+}
+
+/*****************
+* Links
+******************/
+
+a:link {
+	color: #666;
+	text-decoration: none;
+}
+a:visited {
+	color: #666;
+	text-decoration: none;
+}
+a:hover {
+	color: rgb(230,0,108);
+	text-decoration: none;
+}
+a:active {
+	color: #666;
+	text-decoration: none;
+}
+a.active:link {
+	font-weight: bold;
+	color: rgb(230,0,108);
+	text-decoration: none;
+}
+a.active:visited {
+	font-weight: bold;
+	color: rgb(230,0,108);
+	text-decoration: none;
+}
+ a.active:hover {
+	font-weight: bold;
+	color: rgb(230,0,108);
+	text-decoration: none;
+}
+a.active:active {
+	font-weight: bold;
+	color: rgb(230,0,108);
+	text-decoration: none;
+}
+
+/*****************
+* Text formats
+******************/
+
+h3 {
+	font-size: 19px;
+	font-weight: bold;
+	color: rgb(230,0,108);
+}
+
+.indent {
+	padding-left: 15px;
+}
+.left {
+	text-align: left;
+}
+.hidden {
+	display: none;
+}
+.bold {
+	font-weight: bold;
+}
+.underline {
+	text-decoration: underline;
+}
+.italic {
+	font-style: italic;
+}
+.serif {
+	font-family: "Times New Roman", Times, serif;
+}
+.sans {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.tiny {
+	font-size: 8px;
+}
+.small {
+	font-size: 10px;
+}
+.medium {
+	font-size: 12px;
+}
+.large {
+	font-size: 16px;
+}
+.larger {
+	font-size: 22px;
+}
+.huge {
+	font-size: 84px;
+}
+.nowrap {
+	white-space: nowrap;
+}
+.upper {
+	text-transform: uppercase;
+}
+.center {
+	text-align: center;
+}
+.right {
+	text-align: right;
+}
+.left {
+	text-align: left;
+}
+.stretch {
+	letter-spacing: 2px;
+}
+.line-below {
+	margin-bottom: 10px;
+}
+.line-above {
+	margin-top: 10px;
+}
+
+/*****************
+* Main Menu
+******************/
+
+ul#mainmenu {
+	padding: 0 0 0 25px;
+	margin: 0;
+}
+ul#mainmenu li {
+	list-style: none;
+	white-space: nowrap;
+}
+
+/*****************
+* Page Menu
+******************/
+ul#pagemenu {
+	padding: 0;
+	margin: 30px 0 15px 0;
+	width: 100%;
+	position: relative;
+	z-index: 99;
+	white-space: nowrap;
+}
+ul#pagemenu li {
+	display: inline;
+	list-style: none;
+	padding-right: 60px;
+	color: #ccc;
+	text-decoration: underline;
+}
+ul#pagemenu a:link {
+	color: #666;
+	text-decoration: underline;
+}
+ul#pagemenu a:visited {
+	color: #666;
+	text-decoration: underline;
+}
+ul#pagemenu a:hover {
+	color: #ccc;
+	text-decoration: underline;
+}
+ul#pagemenu a:active {
+	color: #666;
+	font-weight: normal;
+	text-decoration: underline;
+}
+ul#pagemenu a.active:link {
+	color: #ccc;
+	font-weight: normal;
+	text-decoration: underline;
+}
+ul#pagemenu a.active:visited {
+	color: #ccc;
+	font-weight: normal;
+	text-decoration: underline;
+}
+ul#pagemenu a.active:hover {
+	color: #ccc;
+	font-weight: normal;
+	text-decoration: underline;
+}
+ul#pagemenu a.active:active {
+	color: #ccc;
+	font-weight: normal;
+	text-decoration: underline;
+}
+/*****************
+* Admin toolbar
+******************/
+div#admin-toolbar-container {
+	position: fixed;
+	z-index: 999;
+	width: 150px;
+	top: 0;
+	left: 5;
+	background: #fff;
+	border: 1px solid rgb(230,0,108);
+	text-align: left;
+	padding: 10px;
+}
+ul#page-admin-menu {
+	padding: 0;
+	margin: 0;
+}
+ul#page-admin-menu li {
+	list-style: none;
+	padding-left: 5px;
+	margin: 10px 0;
+}
+ul#page-admin-menu li img {
+	margin-right: 3px;
+}
+
+/*****************
+* Chronology
+******************/
+.chronology-dates {
+	display: inline;
+	width: 75px;
+	float: left;
+	clear: left;
+	padding: 9px 0
+}
+.chronology-output {
+	float: left;
+	width: 538px;
+	padding: 9px 0;
+}
+.chronology-admin {
+	float: left;
+	clear: left;
+}
+
+/*****************
+* List
+******************/
+.list a:link {
+	color: rgb(230,0,108);
+	font-weight: bold;
+	text-decoration: none;
+}
+.list a:visited {
+	color: rgb(230,0,108);
+	font-weight: bold;
+	text-decoration: none;
+}
+.list a:hover {
+	color: rgb(230,0,108);
+	font-weight: bold;
+	text-decoration: none;
+}
+.list a:active {
+	color: rgb(230,0,108);
+	font-weight: bold;
+	text-decoration: none;
+}
+.list li {
+	padding: 5px 0;
+}
+
+/*****************
+* Quote List
+******************/
+.quote p {
+	margin: 15px 0 0 0;
+}
+.quote p.credits {
+	margin: 2px 0 15px 0;
+}
+
+/*****************
+* Article List
+******************/
+.article_list {
+	padding-left: 15px;
+}
+.article_list li {
+	padding: 2px 0;
+}
+
+/*****************
+* Work
+******************/
+#work_thumbs_wrapper div.work,
+#work_thumbs_wrapper div.work_photo,
+#earlier_work_thumbs_wrapper div.work,
+#earlier_work_thumbs_wrapper div.work_photo {
+	width: 120px;
+	text-align: center;
+	float: left;
+	padding: 0 20px 10px 0;
+	position: relative;
+}
+#earlier_work_thumbs_wrapper {
+	clear: left;
+}
+.work_drag_handle,
+.earlier_work_drag_handle {
+	position: absolute;
+	top: -10px;
+	left: -8px;
+}
+.work a:link, {
+	color: #666;
+	text-decoration: underline;
+}
+.work a:visited {
+	color: #666;
+	text-decoration: underline;
+}
+.work a:hover {
+	color: rgb(230,0,108);
+	text-decoration: underline;
+}
+.work a:active {
+	color: #666;
+	text-decoration: underline;
+}
+#work_photo_wrapper {
+	width: 450px;
+	float: left;
+}
+#work_details {
+	margin: 125px 0 0 470px;
+}
+#add_photo_container {
+	clear: left;
+	padding-left: 25px;
+}
+#venue_date {
+	padding: 10px 5px;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+#description {
+	padding: 10px 5px;
+}
+#credits {
+	padding: 5px;
+}
+ul#photo_link_list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 80%;
+	float: right;
+	text-align: right;
+}
+ul#photo_link_list li {
+	display: inline;
+}
+ul#photo_link_list a.active:link {
+	font-weight: bold;
+	color: rgb(230,0,108);
+	text-decoration: underline;
+}
+ul#photo_link_list a.active:visited {
+	font-weight: bold;
+	color: rgb(230,0,108);
+	text-decoration: underline;
+}
+ul#photo_link_list a.active:hover {
+	font-weight: bold;
+	color: rgb(230,0,108);
+	text-decoration: underline;
+}
+ul#photo_link_list a.active:active {
+	font-weight: bold;
+	color: rgb(230,0,108);
+	text-decoration: underline;
+}
+
+/***********************
+************************
+* CMS dependent styles
+* these are element ID 
+* dependent
+************************/
+
+/** About - Bio **/
+.copytext-25 {
+	width: 270px;
+}
+.media-26 {
+	position: absolute;
+	right: -47px;
+	bottom: 0;
+}
+
+/** About - Statement **/
+.copytext-27 {
+	width: 270px;
+}
+.media-28 {
+	position: absolute;
+	right: -15px;
+	top: -10px;
+}
+
+/** News **/
+#list_12 {
+	padding-left: 15px;
+}
+
+/** Press - Quotes **/
+.quotelist-30 {
+	width: 360px;
+}
+.media-31 {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+/** Press - Publications **/
+#list_13 {
+	padding-left: 15px;
+}

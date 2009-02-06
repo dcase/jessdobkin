@@ -1,0 +1,27 @@
+<% if authorized? %>
+	<%= link_to( image_tag("pencil.png", :size => "16x16"), { :controller => 'chronologies', :action => 'edit', :id => @chronology, :page_section_id => @page_section}, {:title => "Edit"}) %>
+	<%= link_to( 'edit chronology', { :controller => 'chronologies', :action => 'edit', :id => @chronology, :page_section_id => @page_section}, {:title => "Edit"}) %>
+	<br />
+	<%= link_to( image_tag("fail.png", :size => "16x16"), { :controller => 'chronologies', :action => 'destroy', :id => @chronology, :page_section_id => @page_section}, {:confirm => 'Are you sure?', :method => :delete, :title => "Delete"}) %>
+	<%= link_to( 'delete chronology', { :controller => 'chronologies', :action => 'destroy', :id => @chronology, :page_section_id => @page_section}, {:confirm => 'Are you sure?', :method => :delete, :title => "Delete"}) %>
+	<br />
+	<%= link_to_remote image_tag("add.png", :size => "16x16"), :url => { :controller => 'chronology_items', :action => 'new', :chronology_id => @chronology, :page_section_id => @page_section }, :method => :get, :update => "item_form_container" %>
+	<%= link_to_remote "Add item", :url => { :controller => 'chronology_items', :action => 'new', :chronology_id => @chronology, :page_section_id => @page_section }, :method => :get, :update => "chronology_item_form_container" %>
+	<div id="chronology_item_form_container"></div>
+<% end %>
+<% div_for(@chronology) do %>
+  <% for item in @chronology.chronology_items %>
+	<% div_for(item) do %>
+		<% if authorized? %>
+			<div class="chronology-admin">
+			<%= image_tag("drag_handle.png", :size => "16x16", :class => "chronology_item_drag_handle") %>
+			<%= link_to_remote ( image_tag("pencil.png", :size => "16x16"), :url => { :controller => 'chronology_items', :action => 'edit', :id => item, :chronology_id => @chronology, :page_section_id => @page_section  }, :title => "Edit", :method => :get, :update => "chronology_item_form_container" )%>
+			<%= link_to_remote ( image_tag("fail.png", :size => "16x16"), :url => { :controller => 'chronology_items', :action => 'destroy', :id => item, :chronology_id => @chronology, :page_section_id => @page_section  }, :confirm => 'Are you sure?', :method => :delete, :title => "Delete" )%>
+			</div>
+		<% end %>
+		<div class="chronology-dates"><%= item.time_start.year %><%= if item.to_present then "-present" elsif !item.time_end.blank? then "-" + item.time_end.year.to_s end %></div>
+		<div class="chronology-output"><%= textilize_without_paragraph(item.output) %></div>
+	<% end %>
+  <% end %>	
+<% end %>
+<%= sortable_element("chronology_#{@chronology.id}", :url => { :controller => 'chronology_items', :action => 'order', :chronology_id => @chronology.id }, :tag => 'div', :handle => 'chronology_item_drag_handle' ) if authorized? %>

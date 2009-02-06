@@ -1,0 +1,24 @@
+<% form_for(@site_section) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :in_menu %><br />
+    <%= f.check_box :in_menu %>
+  </p>
+  <p>
+    <%= f.label 'is this a link to another website?' %><br />
+    <%= f.check_box :is_external %>
+  </p>
+  <p>
+    <%= f.label 'if so, what is the URL (example: http://google.com)?' %><br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.submit "Submit" %>
+  </p>
+<% end %>

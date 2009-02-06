@@ -1,0 +1,13 @@
+<% form_for(@article_list) do |f| %>
+  <%= f.error_messages %>
+
+  <%= render :partial => 'page_sections/form_include'%>
+
+  <p>
+    <%= f.label 'Name (just for reference, not display):' %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit "Submit" %>
+  </p>
+<% end %>

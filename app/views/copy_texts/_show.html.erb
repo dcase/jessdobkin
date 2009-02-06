@@ -1,0 +1,10 @@
+<% if authorized? %>
+	<%= link_to( image_tag("fail.png", :size => "16x16"), { :controller => 'copy_texts', :action => 'destroy', :id => @copy_text, :page_section_id => @page_section}, {:confirm => 'Are you sure?', :method => :delete, :title => "Delete"}) %>
+	<%= link_to( 'delete text section', { :controller => 'copy_texts', :action => 'destroy', :id => @copy_text, :page_section_id => @page_section}, {:confirm => 'Are you sure?', :method => :delete, :title => "Delete"}) %>
+	<br />
+	<%= link_to( image_tag("pencil.png", :size => "16x16"), { :controller => 'copy_texts', :action => 'edit', :id => @copy_text, :page_section_id => @page_section}, :title => "Edit" ) %>
+	<%= link_to( 'edit text section', { :controller => 'copy_texts', :action => 'edit', :id => @copy_text, :page_section_id => @page_section}, :title => "Edit" ) %>
+	<br />
+<% end %>
+<%= textilize(@copy_text.output) %>
+
