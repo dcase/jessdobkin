@@ -1,3 +1,8 @@
+<% content_for :title do %>
+	<% unless @page.name == 'home' %>
+	 &gt; <%= @page.name.downcase %>
+	<% end %>
+	<% end %>
 <% content_for :body_class do %><%= @site_section.name.gsub(/['" ]/, '') %>-<%= @page.name.gsub(/['" ]/, '') %><% end %>
 <% content_for :callout do %>
 	<% if authorized? %>

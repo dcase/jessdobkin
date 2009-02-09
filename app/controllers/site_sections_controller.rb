@@ -117,4 +117,13 @@ class SiteSectionsController < ApplicationController
    def inspect_params
     render :text => params.inspect
    end
+   
+   def get_menu
+     @site_sections = SiteSection.find(:all, :order => :position)
+     
+     respond_to do |format|
+       format.html { render :partial => 'common/main_menu' }# index.html.erb
+       format.xml  { render :xml => @site_sections }
+     end
+    end
 end

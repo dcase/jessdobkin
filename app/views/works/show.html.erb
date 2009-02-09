@@ -1,3 +1,4 @@
+<% content_for :title do %> &gt; work &gt; <%= @work.title.downcase%><% end %>
 <% content_for :container_class_modifier do %>-work<% end %>
 <div id="work_photo_wrapper">
 	<% unless @work.photos.blank? %>

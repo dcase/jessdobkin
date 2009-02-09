@@ -22,7 +22,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :chronologies, :has_many => :chronology_items
 
-  map.resources :site_sections, :has_many => :pages
+  map.resources :site_sections, :has_many => :pages, :collection => { :get_menu => :get }, :as => 'index.html'
   
   map.resources :page_sections 
 
