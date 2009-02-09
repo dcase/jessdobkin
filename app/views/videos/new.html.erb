@@ -1,6 +1,6 @@
-<h1>New video</h1>
+<h1>New Video</h1>
 
-<% form_for(@video) do |f| %>
+<% form_for(@video, :html => { :multipart => true }) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -9,7 +9,7 @@
   </p>
   <p>
     <%= f.label :date_filmed %><br />
-    <%= f.datetime_select :date_filmed %>
+    <%= f.date_select :date_filmed, :discard_day => true, :discard_month => true, :start_year => 1996, :end_year => Time.now.year %>
   </p>
   <p>
     <%= f.label :description %><br />
@@ -19,14 +19,13 @@
     <%= f.label :credit %><br />
     <%= f.text_field :credit %>
   </p>
-  <p>
-    <%= f.label :position %><br />
-    <%= f.text_field :position %>
-  </p>
-  <p>
-    <%= f.label :video_file %><br />
-    <%= f.text_field :video_file %>
-  </p>
+  <% fields_for :video_file do |t| %>
+		<%= t.error_messages %>
+	  <p>
+	    <%= t.label 'Video' %><br />
+	    <%= t.file_field :uploaded_data %>
+	  </p>
+  <% end %>
   <p>
     <%= f.submit "Create" %>
   </p>

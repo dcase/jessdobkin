@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090206203542) do
+ActiveRecord::Schema.define(:version => 20090208202803) do
 
   create_table "article_list_items", :force => true do |t|
     t.text     "output"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20090206203542) do
     t.string   "alt_text"
     t.string   "class_name"
     t.string   "credit"
+    t.string   "state"
   end
 
   create_table "page_sections", :force => true do |t|

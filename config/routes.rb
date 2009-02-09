@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :videos
+  map.resources :videos, :collection => { :show_first => :get }
 
   map.resources :works
 

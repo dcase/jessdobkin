@@ -1,7 +1,7 @@
 class Work < ActiveRecord::Base
   belongs_to :work_thumbnail
   belongs_to :video
-  has_many :work_photos, :order => :position
+  has_many :work_photos, :order => :position, :dependent => :destroy
   has_many :photos, :through => :work_photos, :order => :position, :dependent => :destroy
   
   acts_as_list :scope => 'is_early = 0'

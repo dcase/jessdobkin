@@ -42,6 +42,10 @@
 	  </p>
   <% end %>
   <p>
+	<%= f.label 'Video:' %>
+	<%= f.collection_select :video_id, Video.find(:all), :id, :title, { :include_blank => 'None' } %>
+  </p>
+  <p>
     <%= f.submit "Update" %>
   </p>
 <% end %>

@@ -179,6 +179,9 @@ h3 {
 .indent {
 	padding-left: 15px;
 }
+.indent10 {
+	padding-left: 10px;
+}
 .left {
 	text-align: left;
 }
@@ -241,6 +244,9 @@ h3 {
 }
 .line-above {
 	margin-top: 10px;
+}
+.pink {
+	color: rgb(230,0,108);
 }
 
 /*****************
@@ -443,9 +449,13 @@ ul#page-admin-menu li img {
 	color: #666;
 	text-decoration: underline;
 }
-#work_photo_wrapper {
+#work_photo_wrapper,
+#video_wrapper {
 	width: 450px;
 	float: left;
+}
+#video_wrapper {
+	padding-top: 125px;
 }
 #work_details {
 	margin: 125px 0 0 470px;
@@ -462,9 +472,31 @@ ul#page-admin-menu li img {
 #description {
 	padding: 10px 5px;
 }
-#credits {
-	padding: 5px;
+#credits,
+#video_link {
+	padding:  40px 5px 5px 5px;
 }
+#video_link a:link, {
+	color: rgb(230,0,108);
+	font-weight: bold;
+	text-decoration: underline;
+}
+#video_link a:visited {
+	color: rgb(230,0,108);
+	font-weight: bold;
+	text-decoration: underline;
+}
+#video_link a:hover {
+	color: rgb(230,0,108);
+	font-weight: bold;
+	text-decoration: underline;
+}
+#video_link a:active {
+	color: rgb(230,0,108);
+	font-weight: bold;
+	text-decoration: underline;
+}
+
 ul#photo_link_list {
 	list-style: none;
 	margin: 0;
@@ -497,6 +529,17 @@ ul#photo_link_list a.active:active {
 	text-decoration: underline;
 }
 
+/*****************
+* Video
+******************/
+ul#videomenu {
+	margin: 0;
+	padding: 0 0 0 10px;
+	list-style: none;
+}
+ul#videomenu {
+	white-space: nowrap;
+}
 /***********************
 ************************
 * CMS dependent styles

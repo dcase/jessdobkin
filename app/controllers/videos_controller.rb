@@ -2,7 +2,7 @@ class VideosController < ApplicationController
   # GET /videos
   # GET /videos.xml
   def index
-    @videos = Video.find(:all)
+    @videos = Video.find(:all, :order => :position)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,10 +13,21 @@ class VideosController < ApplicationController
   # GET /videos/1
   # GET /videos/1.xml
   def show
+    @videos = Video.find(:all, :order => :position)
     @video = Video.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
+      format.xml  { render :xml => @video }
+    end
+  end
+  
+  def show_first
+    @videos = Video.find(:all, :order => :position)
+    @video = Video.find(:first)
+
+    respond_to do |format|
+      format.html { render :template => 'videos/show' }# show.html.erb
       format.xml  { render :xml => @video }
     end
   end
@@ -25,6 +36,7 @@ class VideosController < ApplicationController
   # GET /videos/new.xml
   def new
     @video = Video.new
+    @video_file = VideoFile.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +53,14 @@ class VideosController < ApplicationController
   # POST /videos.xml
   def create
     @video = Video.new(params[:video])
+    
+    if params[:video_file][:uploaded_data].size > 0
+      @video_file = VideoFile.new(params[:video_file])
+      if @video_file.save
+        @video_file.convert
+        @video.video_file = @video_file
+      end
+    end if params[:video_file]
 
     respond_to do |format|
       if @video.save
@@ -58,6 +78,12 @@ class VideosController < ApplicationController
   # PUT /videos/1.xml
   def update
     @video = Video.find(params[:id])
+    
+    if params[:video_file][:uploaded_data].size > 0
+      @video.video_file.destroy if @video.video_file
+      @video_file = @video.build_video_file(params[:video_file])
+      @video_file.convert if @video_file.save
+    end if params[:video_file]
 
     respond_to do |format|
       if @video.update_attributes(params[:video])
@@ -82,4 +108,15 @@ class VideosController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def order
+     params[:videomenu].each_with_index do |id, position|
+       Video.update(id, {:position => position+1})
+     end
+     render :text => params.inspect
+   end
+
+   def inspect_params
+    render :text => params.inspect
+   end
 end

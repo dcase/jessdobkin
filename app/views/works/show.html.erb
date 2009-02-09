@@ -44,7 +44,7 @@
 <div id="work_details">
 	<h3><%=h @work.title %></h3>
 	<div id="venue_date">
-		<%=h @work.venue %>
+		<%= textilize_without_paragraph(@work.venue) %>
 		<br />
 		<%= @work.date_start.year %><%= if @work.is_ongoing then "-ongoing" elsif !@work.date_end.blank? then "-" + @work.date_end.year.to_s end %>
 	</div>

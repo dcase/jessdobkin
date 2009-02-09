@@ -1,33 +1,56 @@
-<p>
-  <b>Title:</b>
-  <%=h @video.title %>
-</p>
+<% content_for :container_class_modifier do %>-work<% end %>
+<div id="video_wrapper">
+	<% if @video.video_file.state == "converted" %>
+		<a  href="<%= @video.video_file.public_filename %>" style="display:block;width:400px;height:300px" id="player"></a> 
 
-<p>
-  <b>Date filmed:</b>
-  <%=h @video.date_filmed %>
-</p>
+		<!-- this will install flowplayer inside previous A- tag. -->
+		<script type="text/javascript">
+		<!--
+		flowplayer("player", "/flowplayer/flowplayer-3.0.5.swf");
+		//-->
+		</script>
+	<% else %>
+		<p>Converting...</p>
+		<script type="text/javascript">
+		<!--
+		window.location.reload.delay(5);
+		//-->
+		</script>
+	<% end %>
+</div>
+<div id="work_details">
+	<h3><%=h @video.title %></h3>
+	<div id="venue_date">
+		<%= @video.date_filmed.year %>
+	</div>
+	<div id="description">
+		<%=h @video.description %>
+	</div>
+	<% unless @video.credit.empty? %>
+		<div id="credits">
+			<p>videography: <span id="work_photo_credit"><%= @video.credit %></span></p>
+		</div>
+	<% end %>
+	<% unless @video.work.blank? %>
+		<div id="video_link">
+			<%= link_to 'more on this work', work_path(@video.work) %>
+		</div>
+	<% end %>
+</div>
 
-<p>
-  <b>Description:</b>
-  <%=h @video.description %>
-</p>
+<% content_for :submenu do %>
+	<%= render :partial => 'videos/video_menu', :locals => { :videos => @videos }%>
+<% end %>
 
-<p>
-  <b>Credit:</b>
-  <%=h @video.credit %>
-</p>
-
-<p>
-  <b>Position:</b>
-  <%=h @video.position %>
-</p>
-
-<p>
-  <b>Video file:</b>
-  <%=h @video.video_file %>
-</p>
-
-
-<%= link_to 'Edit', edit_video_path(@video) %> |
-<%= link_to 'Back', videos_path %>
+<% content_for :admin_toolbar do %>
+	<% if authorized? %>
+		<li><%= image_tag 'pencil.png', :size => "16x16", :alt => 'Edit Video' %><%= link_to 'Edit Video', edit_video_path(@video) %></li>
+		<li><%= image_tag 'fail.png', :size => "16x16", :alt => 'Delete Video' %><%= link_to 'Delete Video', @video, :confirm => 'Are you sure?', :method => :delete %></li>
+		<li><%= image_tag 'add.png', :size => "16x16", :alt => 'Add New Video' %><%= link_to 'Add New Video', new_video_path %></li>
+	<% end %>
+	<% if authorized_preview? %>
+		<li><%= image_tag 'fail.png', :size => "16x16" %><%= link_to 'Turn off preview', :controller => 'videos', :action => 'show', :id => @video %></li>
+	<% elsif authorized? %>
+		<li><%= image_tag 'preview.png', :size => "16x16" %><%= link_to 'Preview Page', :controller => 'videos', :action => 'show', :id => @video, :admin => 'false' %></li>
+	<% end %>
+<% end %>
