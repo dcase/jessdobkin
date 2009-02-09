@@ -540,6 +540,37 @@ ul#videomenu {
 ul#videomenu {
 	white-space: nowrap;
 }
+
+/*****************
+* Contact
+******************/
+
+div#page-container-contact {
+	margin-left: 180px;
+	padding: 100px 0 0 75px;
+	text-align: left;
+}
+div#contact_form_container {
+	width: 445px;
+}
+div#contact_form_container textarea,
+div#contact_form_container input {
+	border: 1px solid #000;
+}
+div#contact_form_container textarea {
+	width: 100%;
+}
+p#signup {
+	margin-top: 0;
+	float: right;
+	text-align: right;
+}
+p#submit {
+	text-align: right;
+}
+p#submit input {
+	border: 0;
+}
 /***********************
 ************************
 * CMS dependent styles

@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :contacts
+
   map.resources :videos, :collection => { :show_first => :get }
 
   map.resources :works

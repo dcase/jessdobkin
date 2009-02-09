@@ -4,7 +4,7 @@
 		<% for video in @videos %>
 			<% content_tag_for(:li, video) do %>
 				<%= image_tag 'drag_handle.png', :size => '16x16', :class => 'video_drag_handle' if authorized? %>
-				<%= link_to video.title, video %>
+				<%= link_to video.short_name.downcase, video %>
 			<% end %>
 		<% end %>
 	</ul>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090208202803) do
+ActiveRecord::Schema.define(:version => 20090209182938) do
 
   create_table "article_list_items", :force => true do |t|
     t.text     "output"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(:version => 20090208202803) do
     t.integer  "chronology_id"
     t.datetime "time_end"
     t.boolean  "to_present"
+  end
+
+  create_table "contacts", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.text     "comment"
+    t.boolean  "sign_up"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "copy_texts", :force => true do |t|
@@ -158,6 +167,7 @@ ActiveRecord::Schema.define(:version => 20090208202803) do
     t.integer  "video_file_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "short_name"
   end
 
   create_table "work_photos", :force => true do |t|

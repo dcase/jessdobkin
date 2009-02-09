@@ -1,0 +1,24 @@
+<% remote_form_for(@contact) do |f| %>
+  <%= f.error_messages %>
+
+ <p id="signup">
+    <label>check box to sign up for mailing list</label><br />
+    <%= f.check_box :sign_up %>
+  </p> 
+ <p>
+    <label>name</label><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <label>email</label><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <label>questions/comments</label><br />
+    <%= f.text_area :comment, :rows => 10, :cols => 54 %>
+  </p>
+  
+  <p id="submit">
+    <%= f.submit "submit" %>
+  </p>
+<% end %>

@@ -1,0 +1,20 @@
+<h1>New Contact:</h1>
+<p>
+  <b>Name:</b>
+  <%=h @contact.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @contact.email %>
+</p>
+<p>
+  <b>Signup for Newsletter?:</b>
+  <%= if @contact.sign_up? then 'Yes, please.' else 'No, thank you.' end %>
+</p>
+
+<p>
+  <b>Question/Comment:</b><br />
+  <%=h @contact.comment %>
+</p>
+

@@ -5,6 +5,7 @@ class Video < ActiveRecord::Base
   acts_as_list
   
   validates_presence_of :title
+  validates_presence_of :short_name
   validates_presence_of :date_filmed
   validates_presence_of :description
   
