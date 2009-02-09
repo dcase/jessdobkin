@@ -476,7 +476,7 @@ ul#page-admin-menu li img {
 #video_link {
 	padding:  40px 5px 5px 5px;
 }
-#video_link a:link, {
+#video_link a:link {
 	color: rgb(230,0,108);
 	font-weight: bold;
 	text-decoration: underline;
