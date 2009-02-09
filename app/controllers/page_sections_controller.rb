@@ -1,4 +1,5 @@
 class PageSectionsController < ApplicationController
+  before_filter :permission
   # GET /page_sections
   # GET /page_sections.xml
   def index

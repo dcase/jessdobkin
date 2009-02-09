@@ -1,4 +1,5 @@
 class GraphicsController < ApplicationController
+  before_filter :permission
   # GET /graphics
   # GET /graphics.xml
   def index

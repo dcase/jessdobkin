@@ -1,5 +1,5 @@
 class SiteSectionsController < ApplicationController
-  
+  before_filter :permission, :except => [:show,:index,:show_home]
   # GET /site_sections
   # GET /site_sections.xml
   def index

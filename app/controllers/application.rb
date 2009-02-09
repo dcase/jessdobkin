@@ -17,6 +17,8 @@ class ApplicationController < ActionController::Base
   
   before_filter :load_sections
   
+  private
+  
   def load_sections
     @site_sections = SiteSection.find(:all, :order => :position)
   end
@@ -26,6 +28,14 @@ class ApplicationController < ActionController::Base
       logged_in? and params[:admin] != "false"
     else
       logged_in?
+    end
+  end
+  
+  def permission
+    unless authorized?
+      flash[:notice] = "You don't look like an admin to me"
+      session[:back_url] = request.referer || root_path
+      redirect_to session[:back_url]
     end
   end
 end

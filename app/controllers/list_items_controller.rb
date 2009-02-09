@@ -1,5 +1,5 @@
 class ListItemsController < ApplicationController
-  in_place_edit_for :list_item, :output
+  before_filter :permission
   
   # GET /list_items
   # GET /list_items.xml

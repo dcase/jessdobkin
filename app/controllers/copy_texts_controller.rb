@@ -1,5 +1,5 @@
 class CopyTextsController < ApplicationController
-  in_place_edit_for :copy_text, :output
+  before_filter :permission
   
   # GET /copy_texts
   # GET /copy_texts.xml

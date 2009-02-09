@@ -1,4 +1,5 @@
 class WorksController < ApplicationController
+  before_filter :permission, :except => [:index, :show]
   # GET /works
   # GET /works.xml
   def index

@@ -1,4 +1,5 @@
 class QuoteListsController < ApplicationController
+  before_filter :permission
   # GET /quote_lists
   # GET /quote_lists.xml
   def index

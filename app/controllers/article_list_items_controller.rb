@@ -1,4 +1,6 @@
 class ArticleListItemsController < ApplicationController
+  before_filter :permission
+  
   # GET /article_list_items
   # GET /article_list_items.xml
   def index

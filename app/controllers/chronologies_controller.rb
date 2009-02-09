@@ -1,4 +1,5 @@
 class ChronologiesController < ApplicationController
+  before_filter :permission
   # GET /chronologies
   # GET /chronologies.xml
   def index

@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   in_place_edit_for :page, :callout
+  before_filter :permission, :except => :show
   # GET /pages
   # GET /pages.xml
   def index

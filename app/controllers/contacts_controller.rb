@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+  before_filter :permission, :except => [:new, :create]
   # GET /contacts
   # GET /contacts.xml
   def index

@@ -1,4 +1,5 @@
 class VideosController < ApplicationController
+  before_filter :permission, :except => [:index,:show,:show_first]
   # GET /videos
   # GET /videos.xml
   def index

@@ -1,5 +1,5 @@
 class WorkPhotosController < ApplicationController
-
+  before_filter :permission
   def order
      list = 'work_thumbs_wrapper'
      params[list.to_sym].each_with_index do |id, position|
