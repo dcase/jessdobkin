@@ -174,7 +174,7 @@ a.active:visited {
 	color: rgb(230,0,108);
 	text-decoration: none;
 }
- a.active:hover {
+a.active:hover {
 	font-weight: bold;
 	color: rgb(230,0,108);
 	text-decoration: none;
@@ -368,22 +368,22 @@ ul#page-admin-menu li img {
 	margin-right: 3px;
 }
 
-#bottom a:link {
+#bottom p a:link {
 	color: rgb(230,0,108);
 	font-weight: bold;
 	text-decoration: none;
 }
-#bottom a:visited {
+#bottom p a:visited {
 	color: rgb(230,0,108);
 	font-weight: bold;
 	text-decoration: none;
 }
-#bottom a:hover {
+#bottom p a:hover {
 	color: rgb(230,0,108);
 	font-weight: bold;
 	text-decoration: none;
 }
-#bottom a:active {
+#bottom p a:active {
 	color: rgb(230,0,108);
 	font-weight: bold;
 	text-decoration: none;
