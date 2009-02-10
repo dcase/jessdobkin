@@ -1,0 +1,16 @@
+img {behavior: url(/javascripts/iepngfix.htc);}
+div#container {
+	min-height: 538px;
+	height: auto !important;
+	height: 538px;
+}
+div#sidebar {
+	min-height: 519px;
+	height: auto !important;
+	height: 519px;
+}
+div#header {
+	min-height: 61px;
+	height: auto !important;
+	height: 61px;
+}
