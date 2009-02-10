@@ -3,7 +3,7 @@
   <%= hidden_field_tag :page_section_id, @page_section.id %>
 
   <p>
-    <%= f.label 'Quote Text' %><br />
+    <label>Quote Text (uses <a href="http://www.textism.com/tools/textile/" target="_blank">Textile</a>)</label><br />
     <%= f.text_area :output, :rows => 5 %>
   </p>
   <p>
