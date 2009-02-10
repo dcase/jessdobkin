@@ -478,7 +478,7 @@ ul#page-admin-menu li img {
 	top: -10px;
 	left: -8px;
 }
-.work a:link, {
+.work a:link {
 	color: #666;
 	text-decoration: underline;
 }
