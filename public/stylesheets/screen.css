@@ -113,6 +113,25 @@ div#footer {
 	margin-bottom: 6px;
 	cursor: pointer;
 }
+input.submit {
+	background: #fff url(/images/arrow-right.gif) no-repeat 3px 0;
+	padding: 10px 0 0 0;
+	border: 0;
+	font-size: 12px;
+	color: #666;
+	cursor: pointer;
+	text-transform: lowercase;
+}
+.admin-buttons {
+	display: inline;
+	width: 48px;
+	position: absolute;
+	left: -57px;
+}
+.back-arrow {
+	background: #fff url(/images/arrow-left.gif) no-repeat;
+	padding: 10px 0 0 0;
+}
 
 /*****************
 * Backgrounds
@@ -170,10 +189,14 @@ a.active:active {
 * Text formats
 ******************/
 
-h3 {
+
+h1, h3 {
 	font-size: 19px;
 	font-weight: bold;
 	color: rgb(230,0,108);
+}
+h1 {
+	text-transform: lowercase;
 }
 
 .indent {
@@ -260,6 +283,7 @@ ul#mainmenu {
 ul#mainmenu li {
 	list-style: none;
 	white-space: nowrap;
+	position: relative;
 }
 
 /*****************
@@ -342,6 +366,27 @@ ul#page-admin-menu li {
 }
 ul#page-admin-menu li img {
 	margin-right: 3px;
+}
+
+#bottom a:link {
+	color: rgb(230,0,108);
+	font-weight: bold;
+	text-decoration: none;
+}
+#bottom a:visited {
+	color: rgb(230,0,108);
+	font-weight: bold;
+	text-decoration: none;
+}
+#bottom a:hover {
+	color: rgb(230,0,108);
+	font-weight: bold;
+	text-decoration: none;
+}
+#bottom a:active {
+	color: rgb(230,0,108);
+	font-weight: bold;
+	text-decoration: none;
 }
 
 /*****************
@@ -535,10 +580,13 @@ ul#photo_link_list a.active:active {
 ul#videomenu {
 	margin: 0;
 	padding: 0 0 0 10px;
+}
+ul#videomenu li {
+	white-space: nowrap;
 	list-style: none;
 }
-ul#videomenu {
-	white-space: nowrap;
+ul#videomenu li.active {
+	list-style-image: url(/images/arrow-bullet.png);
 }
 
 /*****************
@@ -570,6 +618,11 @@ p#submit {
 }
 p#submit input {
 	border: 0;
+}
+.contact-callout {
+	margin: 30px 0;
+	position: relative;
+	left: -20px;
 }
 /***********************
 ************************
@@ -616,4 +669,7 @@ p#submit input {
 /** Press - Publications **/
 #list_13 {
 	padding-left: 15px;
+}
+.list-33 {
+	width: 350px;
 }

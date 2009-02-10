@@ -4,3 +4,8 @@
 <div id="contact_form_container">
 	<%= render :partial => 'form' %>
 </div>
+
+<% content_for :callout do %>
+	<div class="contact-callout"><%= image_tag 'tac-logo.gif', :size => '164x25', :alt => 'Toronto Arts Council' %></div>
+	<div class="contact-callout"><%= image_tag 'oac-logo.gif', :size => '164x33', :alt => 'Ontario Arts Council' %></div>
+<% end %>

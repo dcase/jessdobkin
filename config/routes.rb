@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.connect 'menus/get_menu.:format', :controller => 'menus', :action => 'get_menu'
+  
   map.resources :contacts
 
   map.resources :videos, :collection => { :show_first => :get }

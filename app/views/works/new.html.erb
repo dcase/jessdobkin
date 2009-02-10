@@ -43,7 +43,7 @@
 	<%= f.collection_select :video_id, Video.find(:all), :id, :title, { :include_blank => 'None' } %>
   </p>
   <p>
-    <%= f.submit "Create" %>
+    <%= f.submit "Create", :class => 'submit' %>
   </p>
 <% end %>
 

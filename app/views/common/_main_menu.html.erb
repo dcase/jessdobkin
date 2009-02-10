@@ -2,15 +2,19 @@
 <% if authorized? %>
 	<%= link_to image_tag("add.png", :size => "16x16"), new_site_section_path %>
 	<%= link_to "Add section to site", new_site_section_path %>
+	<ul id="mainmenu" class="admin">
+<% else %>
+	<ul id="mainmenu">
 <% end %>
-<ul id="mainmenu">
 <% for site_section in @site_sections %>
 	<% if site_section.in_menu? or authorized? %>
 		<% content_tag_for(:li, site_section) do %>
 			<% if authorized? %>
-				<%= image_tag("drag_handle.png", :size => "16x16", :class => "site_section_drag_handle") %>
-				<%= link_to ( image_tag("pencil.png", :size => "16x16"), edit_site_section_path(site_section), {:title => "Edit"}) %>
-				<%= link_to ( image_tag("fail.png", :size => "16x16"), { :controller => 'site_sections', :action => 'destroy', :id => site_section }, { :confirm => 'Are you sure?', :method => :delete, :title => "Delete"} ) %>
+				<div class="admin-buttons">
+					<%= image_tag("drag_handle.png", :size => "16x16", :class => "site_section_drag_handle") %>
+					<%= link_to ( image_tag("pencil.png", :size => "16x16"), edit_site_section_path(site_section), {:title => "Edit"}) %>
+					<%= link_to ( image_tag("fail.png", :size => "16x16"), { :controller => 'site_sections', :action => 'destroy', :id => site_section }, { :confirm => 'Are you sure?', :method => :delete, :title => "Delete"} ) %>
+				</div>
 			<% end %>
 			<% if site_section.is_external? %>
 				<%= link_to site_section.name, {}, :href => site_section.url, :target => "_blank" %>

@@ -26,6 +26,6 @@
   </p>
   <% end %>
   <p>
-    <%= f.submit "Update" %> or <%= link_to 'cancel', site_section_page_url(@site_section,@page), :onclick => "this.up('div').update('');return false;" %>
+    <%= f.submit "Update", :class => 'submit' %> or <%= link_to 'cancel', site_section_page_url(@site_section,@page), :onclick => "this.up('div').update('');return false;" %>
   </p>
 <% end %>

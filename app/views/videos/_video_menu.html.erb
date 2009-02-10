@@ -2,7 +2,7 @@
 	<p class="pink bold indent10">select video:</p>
 	<ul id="videomenu">
 		<% for video in @videos %>
-			<% content_tag_for(:li, video) do %>
+			<% content_tag_for(:li, video, :class => ( video == @video ? 'active' : 'inactive' )) do %>
 				<%= image_tag 'drag_handle.png', :size => '16x16', :class => 'video_drag_handle' if authorized? %>
 				<%= link_to video.short_name.downcase, video %>
 			<% end %>

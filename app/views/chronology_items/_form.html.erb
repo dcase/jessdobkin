@@ -19,6 +19,6 @@
     <%= f.text_area :output, :rows => 3, :cols => 50 %>
   </p>
   <p>
-    <%= f.submit "Submit" %> or <%= link_to 'cancel', site_section_page_url(@site_section,@page), :onclick => "this.up('div').update('');return false;" %>
+    <%= f.submit "Submit", :class => 'submit' %> or <%= link_to 'cancel', site_section_page_url(@site_section,@page), :onclick => "this.up('div').update('');return false;" %>
   </p>
 <% end %>
