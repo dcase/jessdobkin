@@ -14,7 +14,7 @@ function toggleActive(click) {
 }
 
 function resetAllAnchorsToInactive() {
-	anchors = $$('#container a');
+	anchors = $$('.article_list a');
 	anchors.each( function(a) {
 		if( a.hasClassName('active')) {
 			a.removeClassName('active');
