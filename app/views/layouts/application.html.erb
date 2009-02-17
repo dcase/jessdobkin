@@ -33,9 +33,9 @@ end if @site_section
 	<!--[if lt IE 7]>
 	<%= stylesheet_link_tag 'ie6' %>
 	<![endif]-->
-	<% bundle do %>
-		<%= javascript_include_tag 'prototype', 'scriptaculous','class-scroll','lightbox','flowplayer','application' %>
-	<% end %>
+
+	<%= javascript_include_tag 'prototype', 'scriptaculous','class-scroll','lightbox','flowplayer','application', :cache => 'all' %>
+
 </head>
 
 <body class="<%= yield :body_class %>">
