@@ -1,0 +1,17 @@
+<h2 class="hidden">Main Menu</h2>
+
+<ul id="mainmenu">
+<% for site_section in @site_sections %>
+	<% if site_section.in_menu? or authorized? %>
+		<% content_tag_for(:li, site_section) do %>
+			<% if site_section.is_external? %>
+				<%= link_to site_section.name, {}, :href => site_section.url, :target => "_blank" %>
+			<% elsif site_section.controller.blank? %>
+				<%= link_to site_section.name, { :controller => 'pages', :action => 'show', :id => site_section.pages.first, :site_section_id => site_section }, :only_path => false, :class => ( @site_section == site_section ? "active" : "inactive" ) %>
+			<% else %>
+				<%= link_to site_section.name, { :controller => site_section.controller , :action => site_section.action }, :only_path => false, :class => ( site_section.controller == params[:controller] ? "active" : "inactive" ) %>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
+</ul>
