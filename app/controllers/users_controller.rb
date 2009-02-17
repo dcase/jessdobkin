@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :permission
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   

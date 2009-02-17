@@ -100,6 +100,7 @@ div#footer {
 }
 .home-home div#page-container {
 	margin-left: 320px;
+	visibility: hidden;
 }
 
 /*****************
