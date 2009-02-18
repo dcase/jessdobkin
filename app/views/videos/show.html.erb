@@ -4,7 +4,7 @@
 <div id="video_wrapper">
 	<% if @video.video_file %>
 		<% if @video.video_file.state == "converted" %>
-			<a  href="<%= @video.video_file.public_filename %>" style="display:block;width:320px;height:264px;" id="player"></a> 
+			<a  href="<%= @video.video_file.public_filename %>" style="display:block;width:400px;height:300px;" id="player"></a> 
 
 			<!-- this will install flowplayer inside previous A- tag.  -->
 			<script type="text/javascript">
