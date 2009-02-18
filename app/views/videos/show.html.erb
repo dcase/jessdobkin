@@ -9,9 +9,13 @@
 			<!-- this will install flowplayer inside previous A- tag. -->
 			<script type="text/javascript">
 			<!--
-			flowplayer("player", "/flowplayer/flowplayer-3.0.5.swf",{ 
-			clip: { 
-			  scaling: 'fit' 
+			flowplayer("player", "/flowplayer/flowplayer-3.0.5.swf", {
+				clip: { 
+				  onStart: function(clip) { 
+				    var wrap = $('player'); 
+				    wrap.setStyle({width: clip.width, height: clip.height}); 
+				  } 
+				} 
 			});
 			//-->
 			</script>
