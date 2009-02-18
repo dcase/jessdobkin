@@ -6,7 +6,7 @@
 		<% if @video.video_file.state == "converted" %>
 			<a  href="<%= @video.video_file.public_filename %>" style="display:block;" id="player"></a> 
 
-			<!-- this will install flowplayer inside previous A- tag. -->
+			<!-- this will install flowplayer inside previous A- tag.  -->
 			<script type="text/javascript">
 			<!--
 			flowplayer("player", "/flowplayer/flowplayer-3.0.5.swf", {
