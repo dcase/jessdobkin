@@ -50,7 +50,7 @@ class VideoFile < Media
   #build the command to execute ffmpeg
   # original:  ffmpeg -i #{ RAILS_ROOT + '/public' + public_filename }  -ar 22050 -ab 32 -s 480x360 -vcodec flv -r 25 -qscale 8 -f flv -y #{ RAILS_ROOT + '/public' + public_filename + flv }
     command = <<-end_command
-    /usr/local/bin/ffmpeg -i #{ RAILS_ROOT + '/public' + public_filename }  -ar 44100 -ab 32 -sameq -vcodec flv -f flv -y #{ RAILS_ROOT + '/public' + public_filename + flv }
+    /usr/local/bin/ffmpeg -i #{ RAILS_ROOT + '/public' + public_filename }  -ar 44100 -ab 32000 -sameq -f flv -y #{ RAILS_ROOT + '/public' + public_filename + flv }
 
     end_command
 
