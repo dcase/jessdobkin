@@ -12,7 +12,9 @@
 			flowplayer("player", "/flowplayer/flowplayer-3.0.5.swf", {
 				clip: { 
 				  onStart: function(clip) { 
-				    $('player').setStyle({width: clip.width + 'px', height: clip.height + 24 + 'px'}); 
+				    $('player').setStyle({width: clip.width + 'px', height: clip.height + 24 + 'px'});
+					$('player_API').writeAttribute('width', clip.width);
+					$('player_API').writeAttribute('height', clip.height + 24); 
 				  } 
 				} 
 			});
