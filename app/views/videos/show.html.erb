@@ -4,20 +4,12 @@
 <div id="video_wrapper">
 	<% if @video.video_file %>
 		<% if @video.video_file.state == "converted" %>
-			<a  href="<%= @video.video_file.public_filename %>" style="display:block;" id="player"></a> 
+			<a  href="<%= @video.video_file.public_filename %>" style="display:block;width:320px;height:264px;" id="player"></a> 
 
 			<!-- this will install flowplayer inside previous A- tag.  -->
 			<script type="text/javascript">
 			<!--
-			flowplayer("player", "/flowplayer/flowplayer-3.0.5.swf", {
-				clip: { 
-				  onStart: function(clip) { 
-				    $('player').setStyle({width: clip.width + 'px', height: clip.height + 24 + 'px'});
-					$('player_api').writeAttribute('width', clip.width);
-					$('player_api').writeAttribute('height', clip.height + 24); 
-				  } 
-				} 
-			});
+			flowplayer("player", "/flowplayer/flowplayer-3.0.5.swf");
 			//-->
 			</script>
 		<% else %>
