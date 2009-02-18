@@ -1,22 +1,25 @@
 <% content_for :title do %> &gt; video &gt; <%= @video.title.downcase %><% end %>
 <% content_for :container_class_modifier do %>-work<% end %>
-<div id="video_wrapper">
-	<% if @video.video_file.state == "converted" %>
-		<a  href="<%= @video.video_file.public_filename %>" style="display:block;width:400px;height:300px" id="player"></a> 
 
-		<!-- this will install flowplayer inside previous A- tag. -->
-		<script type="text/javascript">
-		<!--
-		flowplayer("player", "/flowplayer/flowplayer-3.0.5.swf");
-		//-->
-		</script>
-	<% else %>
-		<p>Converting...</p>
-		<script type="text/javascript">
-		<!--
-		window.location.reload.delay(5);
-		//-->
-		</script>
+<div id="video_wrapper">
+	<% if @video.video_file %>
+		<% if @video.video_file.state == "converted" %>
+			<a  href="<%= @video.video_file.public_filename %>" style="display:block;width:400px;height:300px" id="player"></a> 
+
+			<!-- this will install flowplayer inside previous A- tag. -->
+			<script type="text/javascript">
+			<!--
+			flowplayer("player", "/flowplayer/flowplayer-3.0.5.swf");
+			//-->
+			</script>
+		<% else %>
+			<p>Converting...</p>
+			<script type="text/javascript">
+			<!--
+			window.location.reload.delay(5);
+			//-->
+			</script>
+		<% end %>
 	<% end %>
 </div>
 <div id="work_details">
