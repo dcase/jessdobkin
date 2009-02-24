@@ -9,7 +9,11 @@
 			<!-- this will install flowplayer inside previous A- tag.  -->
 			<script type="text/javascript">
 			<!--
-			flowplayer("player", "/flowplayer/flowplayer-3.0.5.swf");
+			flowplayer("player", "/flowplayer/flowplayer-3.0.5.swf", {
+				clip: {
+					autoPlay: false
+				}
+			});
 			//-->
 			</script>
 		<% else %>

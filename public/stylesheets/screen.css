@@ -460,6 +460,15 @@ ul#page-admin-menu li img {
 /*****************
 * Work
 ******************/
+#work-scroll {
+	height: 515px;
+	overflow: auto;
+}
+#work-scroll-buttons {
+	position: relative;
+	top: -30px;
+	left: 600px;
+}
 #work_thumbs_wrapper div.work,
 #work_thumbs_wrapper div.work_photo,
 #earlier_work_thumbs_wrapper div.work,
@@ -478,6 +487,10 @@ ul#page-admin-menu li img {
 	position: absolute;
 	top: -10px;
 	left: -8px;
+}
+div#work-scroll-buttons {
+	position: relative;
+	
 }
 .work a:link {
 	color: #666;

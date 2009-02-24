@@ -1,28 +1,41 @@
-<div id="work_thumbs_wrapper">
-	<% for work in @works %>
-		<% div_for(work) do %>
-			<div><%= link_to image_tag(work.work_thumbnail.public_filename, :size => "#{work.work_thumbnail.width}x#{work.work_thumbnail.height}"), work %></div>
-			<div><%= link_to work.title, work %></div>
-			<div><%= work.date_start.year %><%= if work.is_ongoing then "-ongoing" elsif !work.date_end.blank? then "-" + work.date_end.year.to_s end %></div>
-			<%= image_tag 'drag_handle.png', :size => "16x16", :alt => 'drag', :class => 'work_drag_handle' if authorized? %>
-		<% end %>
-	<% end %>
-</div>
-<%= sortable_element("work_thumbs_wrapper", :url => { :controller => 'works', :action => 'order', :container_id => "work_thumbs_wrapper"}, :tag => 'div', :handle => 'work_drag_handle' ) if authorized? %>
-<% unless @earlier_works.blank? %>
-	<div id="earlier_work_thumbs_wrapper">
-		<h3>earlier works</h3>
-		<% for work in @earlier_works %>
+<div id="work-scroll">
+	<div id="work_thumbs_wrapper">
+		<% for work in @works %>
 			<% div_for(work) do %>
 				<div><%= link_to image_tag(work.work_thumbnail.public_filename, :size => "#{work.work_thumbnail.width}x#{work.work_thumbnail.height}"), work %></div>
 				<div><%= link_to work.title, work %></div>
 				<div><%= work.date_start.year %><%= if work.is_ongoing then "-ongoing" elsif !work.date_end.blank? then "-" + work.date_end.year.to_s end %></div>
-				<%= image_tag 'drag_handle.png', :size => "16x16", :alt => 'drag', :class => 'earlier_work_drag_handle' if authorized? %>
+				<%= image_tag 'drag_handle.png', :size => "16x16", :alt => 'drag', :class => 'work_drag_handle' if authorized? %>
 			<% end %>
 		<% end %>
 	</div>
-	<%= sortable_element("earlier_work_thumbs_wrapper", :url => { :controller => 'works', :action => 'order', :container_id => "earlier_work_thumbs_wrapper"}, :tag => 'div', :handle => 'earlier_work_drag_handle' ) if authorized? %>
-<% end %>
+	<%= sortable_element("work_thumbs_wrapper", :url => { :controller => 'works', :action => 'order', :container_id => "work_thumbs_wrapper"}, :tag => 'div', :handle => 'work_drag_handle' ) if authorized? %>
+	<% unless @earlier_works.blank? %>
+		<div id="earlier_work_thumbs_wrapper">
+			<h3>earlier works</h3>
+			<% for work in @earlier_works %>
+				<% div_for(work) do %>
+					<div><%= link_to image_tag(work.work_thumbnail.public_filename, :size => "#{work.work_thumbnail.width}x#{work.work_thumbnail.height}"), work %></div>
+					<div><%= link_to work.title, work %></div>
+					<div><%= work.date_start.year %><%= if work.is_ongoing then "-ongoing" elsif !work.date_end.blank? then "-" + work.date_end.year.to_s end %></div>
+					<%= image_tag 'drag_handle.png', :size => "16x16", :alt => 'drag', :class => 'earlier_work_drag_handle' if authorized? %>
+				<% end %>
+			<% end %>
+		</div>
+		<%= sortable_element("earlier_work_thumbs_wrapper", :url => { :controller => 'works', :action => 'order', :container_id => "earlier_work_thumbs_wrapper"}, :tag => 'div', :handle => 'earlier_work_drag_handle' ) if authorized? %>
+	<% end %>
+</div><!-- end 'work-scroll' -->
+<div id="work-scroll-buttons" class="scroll_buttons">
+	<%= image_tag 'scroll-up.gif', :id => "scroll_up" + ( @for_section ? '_' + @page_section.id.to_s : '' ), :size => "9x10", :alt => "scroll up" %>
+	<%= image_tag 'scroll-down.gif', :id => "scroll_down" + ( @for_section ? '_' + @page_section.id.to_s : '' ), :size => "9x10", :alt => "scroll down" %>
+</div>
+<script type="text/javascript">
+<!--
+
+var scroll_work = new TextScroll('scroll_work','work-scroll','scroll_up','scroll_down');
+
+//-->
+</script>
 <% content_for :admin_toolbar do %>
 	<% if authorized? %>
 		<li><%= image_tag 'add.png', :size => "16x16", :alt => 'Add Work' %><%= link_to 'Add Work', new_work_path %></li>
