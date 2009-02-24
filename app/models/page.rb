@@ -6,4 +6,8 @@ class Page < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :scroll_height, :if => :has_scroll
   validates_numericality_of :scroll_height, :if => Proc.new { |e| !e.scroll_height.blank? }
+  
+  def to_param
+    "#{id}-#{name.downcase.strip.gsub(/\ /, '-').gsub(/[^\w\-]/, '').gsub(/[-]+/, '-')}"
+  end
 end

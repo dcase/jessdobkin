@@ -30,11 +30,6 @@
 	<div id="description">
 		<%=h @video.description %>
 	</div>
-	<% unless @video.credit.empty? %>
-		<div id="credits">
-			<p>videography: <span id="work_photo_credit"><%= @video.credit %></span></p>
-		</div>
-	<% end %>
 	<% unless @video.work.blank? %>
 		<div id="video_link">
 			<%= link_to 'more on this work', work_path(@video.work) %>

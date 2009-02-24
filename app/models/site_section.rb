@@ -4,4 +4,8 @@ class SiteSection < ActiveRecord::Base
   
   validates_presence_of :name
   validates_presence_of :url, :if => Proc.new { |e| e.is_external? }
+  
+  def to_param
+    "#{id}-#{name.downcase.strip.gsub(/\ /, '-').gsub(/[^\w\-]/, '').gsub(/[-]+/, '-')}"
+  end
 end

@@ -25,7 +25,6 @@
 								 	page.replace_html('work_photo', image_tag(item.public_filename))
 									page.select('#work_photos_links a').each do |link| link.removeClassName('active') end
 									page["link#{i+1}"].addClassName('active')
-									page.replace_html('work_photo_credit', item.credit)
 								end %>
 							<% end %>
 						<% end %>
@@ -52,11 +51,6 @@
 	<div id="description">
 		<%=h @work.description %>
 	</div>
-	<% unless @work.photos.empty? %>
-		<div id="credits">
-			<p>photo: <span id="work_photo_credit"><%= @work.photos.first.credit %></span></p>
-		</div>
-	<% end %>
 	<% unless @work.video.blank? %>
 		<div id="video_link">
 			<%= link_to 'watch video', video_path(@work.video) %>

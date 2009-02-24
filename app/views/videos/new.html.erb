@@ -19,10 +19,6 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </p>
-  <p>
-    <%= f.label :credit %><br />
-    <%= f.text_field :credit %>
-  </p>
   <% fields_for :video_file do |t| %>
 		<%= t.error_messages %>
 	  <p>
