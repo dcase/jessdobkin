@@ -24,4 +24,4 @@
 	<% end %>
   <% end %>	
 <% end %>
-<%= sortable_element("chronology_#{@chronology.id}", :url => { :controller => 'chronology_items', :action => 'order', :chronology_id => @chronology.id }, :tag => 'div', :handle => 'chronology_item_drag_handle' ) if authorized? %>
+<%= sortable_element("chronology_#{@chronology.id}", :url => { :controller => 'chronology_items', :action => 'order', :chronology_id => @chronology.id }, :tag => 'div', :only => 'chronology_item', :scroll => true, :handle => 'chronology_item_drag_handle' ) if authorized? %>
