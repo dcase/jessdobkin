@@ -61,6 +61,7 @@ class CopyTextsController < ApplicationController
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @copy_text, :status => :created, :location => @copy_text }
       else
+        @page_section.destroy
         format.html { render :action => "new" }
         format.xml  { render :xml => @copy_text.errors, :status => :unprocessable_entity }
       end

@@ -59,6 +59,7 @@ class GraphicsController < ApplicationController
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @graphic, :status => :created, :location => @graphic }
       else
+        @page_section.destroy
         format.html { render :action => "new" }
         format.xml  { render :xml => @graphic.errors, :status => :unprocessable_entity }
       end
