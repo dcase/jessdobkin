@@ -51,12 +51,11 @@ class CopyTextsController < ApplicationController
     @copy_text = CopyText.new(params[:copy_text])
     @page_section = PageSection.new(params[:page_section])
     @page_section.content = @copy_text
-    @page_section.save
     @page = @page_section.page
     @site_section = @page.site_section
 
     respond_to do |format|
-      if @copy_text.save
+      if @page_section.save and @copy_text.save
         flash[:notice] = 'CopyText was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @copy_text, :status => :created, :location => @copy_text }

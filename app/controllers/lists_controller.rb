@@ -50,12 +50,11 @@ class ListsController < ApplicationController
     @list = List.new(params[:list])
     @page_section = PageSection.new(params[:page_section])
     @page_section.content = @list
-    @page_section.save
     @page = @page_section.page
     @site_section = @page.site_section
 
     respond_to do |format|
-      if @list.save
+      if @page_section.save and @list.save
         flash[:notice] = 'List was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @list, :status => :created, :location => @list }

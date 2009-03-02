@@ -51,12 +51,11 @@ class ArticleListsController < ApplicationController
     @article_list = ArticleList.new(params[:article_list])
     @page_section = PageSection.new(params[:page_section])
     @page_section.content = @article_list
-    @page_section.save
     @page = Page.find(params[:page_section][:page_id])
     @site_section = @page.site_section
 
     respond_to do |format|
-      if @article_list.save
+      if @page_section.save and @article_list.save
         flash[:notice] = 'ArticleList was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @article_list, :status => :created, :location => @article_list }

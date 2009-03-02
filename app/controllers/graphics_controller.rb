@@ -49,12 +49,11 @@ class GraphicsController < ApplicationController
     @graphic = Graphic.new(params[:graphic])
     @page_section = PageSection.new(params[:page_section])
     @page_section.content = @graphic
-    @page_section.save
     @page = @page_section.page
     @site_section = @page.site_section
 
     respond_to do |format|
-      if @graphic.save
+      if @page_section.save and @graphic.save
         flash[:notice] = 'Graphic was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @graphic, :status => :created, :location => @graphic }
