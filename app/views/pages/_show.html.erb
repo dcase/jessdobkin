@@ -30,7 +30,7 @@
 		<% end %>
 	</div>
 	<%= render :partial => 'common/scroll', :locals => { :page => @page, :for_section => (@for_section = false) } if @page.has_scroll? %>
-	<%= sortable_element("page_sections_container", :url => { :controller => 'page_sections', :action => 'order' }, :tag => :div, :only => 'page_section', :scroll => true, :handle => 'page_section_drag_handle'  ) if authorized? %>
+	<%= sortable_element("page_sections_container", :url => { :controller => 'page_sections', :action => 'order' }, :tag => :div, :only => 'page_section', :handle => 'page_section_drag_handle'  ) if authorized? %>
 </div>
 
 	<% content_for :admin_toolbar do %>
