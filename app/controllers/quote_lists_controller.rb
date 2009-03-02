@@ -50,11 +50,12 @@ class QuoteListsController < ApplicationController
     @quote_list = QuoteList.new(params[:quote_list])
     @page_section = PageSection.new(params[:page_section])
     @page_section.content = @quote_list
+    @page_section.save
     @page = @page_section.page
     @site_section = @page.site_section
 
     respond_to do |format|
-      if @page_section.save and @quote_list.save
+      if @quote_list.save
         flash[:notice] = 'QuoteList was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @quote_list, :status => :created, :location => @quote_list }
