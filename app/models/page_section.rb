@@ -6,4 +6,10 @@ class PageSection < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :scroll_height, :if => :has_scroll
   validates_numericality_of :scroll_height, :if => Proc.new { |e| !e.scroll_height.blank? }
+  
+  def before_validation
+    if title.blank?
+      self.title = "no title"
+    end
+  end
 end
