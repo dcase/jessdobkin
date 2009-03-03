@@ -405,9 +405,6 @@ ul#page-admin-menu li img {
 	width: 538px;
 	padding: 9px 0;
 }
-.chronology-admin {
-
-}
 
 /*****************
 * List
@@ -686,6 +683,6 @@ p#submit input {
 #list_13 {
 	padding-left: 15px;
 }
-.list-33 {
+.press-publications ul.article_list {
 	width: 350px;
 }
