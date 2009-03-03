@@ -48,8 +48,11 @@ class ArticleListItemsController < ApplicationController
     @page_section = @article_list.page_section
     @page = @page_section.page
     @site_section = @page.site_section
-    
     @article_list_item = @article_list.article_list_items.find(params[:id])
+    
+    if @article_list_item.articles.empty?
+      @article_list_item.articles.build
+    end
     
   end
 
