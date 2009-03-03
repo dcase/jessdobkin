@@ -16,6 +16,7 @@
     <%= f.label 'URL (if link):' %><br />
     <%= f.text_field :url %>
   </p>
+  <h3>Article Pages:</h3>
   <ol id="articles">
   	<%= render :partial => 'article', :collection => @article_list_item.articles %>
   </ol>
