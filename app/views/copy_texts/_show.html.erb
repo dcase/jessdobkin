@@ -6,5 +6,7 @@
 	<%= link_to( 'edit text section', { :controller => 'copy_texts', :action => 'edit', :id => @copy_text, :page_section_id => @page_section}, :title => "Edit" ) %>
 	<br />
 <% end %>
-<%= textilize(@copy_text.output) %>
+<% div_for(@copy_text, :class => 'content') do %>
+	<%= textilize(@copy_text.output) %>
+<% end %>
 

@@ -28,10 +28,13 @@ class ArticleListItemsController < ApplicationController
   # GET /article_list_items/new
   # GET /article_list_items/new.xml
   def new
-    @page_section = PageSection.find(params[:page_section_id])
     @article_list = ArticleList.find(params[:article_list_id])
+    @page_section = @article_list.page_section
+    @page = @page_section.page
+    @site_section = @page.site_section
+    
     @article_list_item = @article_list.article_list_items.build
-    @article = Article.new
+    @article_list_item.articles.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,27 +44,27 @@ class ArticleListItemsController < ApplicationController
 
   # GET /article_list_items/1/edit
   def edit
-    @page_section = PageSection.find(params[:page_section_id])
+    @article_list = ArticleList.find(params[:article_list_id])
+    @page_section = @article_list.page_section
     @page = @page_section.page
     @site_section = @page.site_section
-    @article_list = ArticleList.find(params[:article_list_id])
+    
     @article_list_item = @article_list.article_list_items.find(params[:id])
+    
   end
 
   # POST /article_list_items
   # POST /article_list_items.xml
   def create
-    @page_section = PageSection.find(params[:page_section_id])
     @article_list = ArticleList.find(params[:article_list_id])
+    @page_section = @article_list.page_section
+    
     @article_list_item = @article_list.article_list_items.build(params[:article_list_item])
-    if params[:article][:uploaded_data].size > 0
-      @article_list_item.create_article(params[:article])
-    end
-    @page = @page_section.page
-    @site_section = @page.site_section
 
     respond_to do |format|
       if @article_list_item.save
+         @page = @page_section.page
+          @site_section = @page.site_section
         flash[:notice] = 'ArticleListItem was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.js { render :template => 'page_sections/ajax_success' }
@@ -76,18 +79,15 @@ class ArticleListItemsController < ApplicationController
   # PUT /article_list_items/1
   # PUT /article_list_items/1.xml
   def update
-    @page_section = PageSection.find(params[:page_section_id])
-    @page = @page_section.page
-    @site_section = @page.site_section
     @article_list = ArticleList.find(params[:article_list_id])
+    @page_section = @article_list.page_section
+    
     @article_list_item = @article_list.article_list_items.find(params[:id])
-    if params[:article][:uploaded_data].size > 0
-      @article_list_item.article.destroy if @article_list_item.article
-      @article_list_item.create_article(params[:article])
-    end
 
     respond_to do |format|
       if @article_list_item.update_attributes(params[:article_list_item])
+        @page = @page_section.page
+        @site_section = @page.site_section
         flash[:notice] = 'ArticleListItem was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.js { render :template => 'page_sections/ajax_success' }
@@ -102,8 +102,9 @@ class ArticleListItemsController < ApplicationController
   # DELETE /article_list_items/1
   # DELETE /article_list_items/1.xml
   def destroy
-    @page_section = PageSection.find(params[:page_section_id])
     @article_list = ArticleList.find(params[:article_list_id])
+    @page_section = @article_list.page_section
+    
     @article_list_item = @article_list.article_list_items.find(params[:id])
     @article_list_item.destroy
 

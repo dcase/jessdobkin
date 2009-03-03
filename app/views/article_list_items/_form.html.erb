@@ -3,7 +3,7 @@
   <%= hidden_field_tag :page_section_id, @page_section.id %>
 
   <p>
-    <%= f.label 'Display Text' %><br />
+    <label>Text (uses <a href="http://www.textism.com/tools/textile/" target="_blank">Textile</a>):</label><br /><br />
     <%= f.text_area :output, :rows => 2 %>
   </p>
   <p>
@@ -14,16 +14,18 @@
     <%= f.label 'URL (if link):' %><br />
     <%= f.text_field :url %>
   </p>
-  <% fields_for :article do |a| %>
-	<%= a.error_messages %>
-  <p>
-    <%= a.label 'Article Image' %><br />
-    <%= a.file_field :uploaded_data %>
-  </p>
-  <p>
-    <%= a.label 'ALT text' %><br />
-    <%= a.text_field :alt_text %>
-  </p>
+  <% for article in @article_list_item.articles %>
+	  <% fields_for 'article_list_item[article_attributes][]', article do |a| %>
+		<%= a.error_messages %>
+	  <p>
+	    <%= a.label 'Article Image' %><br />
+	    <%= a.file_field :uploaded_data %>
+	  </p>
+	  <p>
+	    <%= a.label 'ALT text' %><br />
+	    <%= a.text_field :alt_text %>
+	  </p>
+	  <% end %>
   <% end %>
   <p>
     <%= f.submit "Update", :class => 'submit' %> or <%= link_to 'cancel', site_section_page_url(@site_section,@page), :onclick => "this.up('div').update('');return false;" %>

@@ -1,3 +1,28 @@
 <h1>New Article List Item</h1>
 
-<%= render :partial => 'form' %>
+<% form_for([@article_list, @article_list_item], :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+  <%= hidden_field_tag :page_section_id, @page_section.id %>
+
+  <p>
+    <label>Text (uses <a href="http://www.textism.com/tools/textile/" target="_blank">Textile</a>):</label><br /><br />
+    <%= f.text_area :output, :rows => 2 %>
+  </p>
+  <p>
+    <%= f.label 'Links to somewhere else?' %><br />
+    <%= f.check_box :is_link %>
+  </p>
+  <p>
+    <%= f.label 'URL (if link):' %><br />
+    <%= f.text_field :url %>
+  </p>
+  <ol id="articles">
+  	<%= render :partial => 'article', :collection => @article_list_item.articles %>
+  </ol>
+  <p><%= link_to_function "Add a page" do |page| 
+	page.insert_html :bottom, :articles, :partial => 'article', :object => Article.new 
+	end %></p>
+  <p>
+    <%= f.submit "Update", :class => 'submit' %> or <%= link_to 'cancel', site_section_page_url(@site_section,@page) %>
+  </p>
+<% end %>

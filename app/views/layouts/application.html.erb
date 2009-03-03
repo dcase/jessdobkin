@@ -66,5 +66,12 @@ end if @site_section
 <% if authorized? or authorized_preview? %>
 	<%= render :partial => 'common/admin_toolbar', :locals => { :site_section => @site_section, :page => @page } %>
 <% end %>
+<% if !authorized? or authorized_preview? %>
+	<script type="text/javascript">
+	Event.observe(window,'load',function(){
+		addTargetToLink(['.article_list_item','.list_item','.chronology_item','copy_text','.quote']);
+	});
+	</script>
+<% end %>
 </body>
 </html>

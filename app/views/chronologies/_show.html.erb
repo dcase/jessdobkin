@@ -9,7 +9,7 @@
 	<%= link_to_remote "Add item", :url => { :controller => 'chronology_items', :action => 'new', :chronology_id => @chronology, :page_section_id => @page_section }, :method => :get, :update => "chronology_item_form_container" %>
 	<div id="chronology_item_form_container"></div>
 <% end %>
-<% div_for(@chronology) do %>
+<% div_for(@chronology, :class => 'content') do %>
   <% for item in @chronology.chronology_items %>
 	<% div_for(item) do %>
 		<% if authorized? %>

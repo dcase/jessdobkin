@@ -406,8 +406,7 @@ ul#page-admin-menu li img {
 	padding: 9px 0;
 }
 .chronology-admin {
-	float: left;
-	clear: left;
+
 }
 
 /*****************
@@ -455,6 +454,9 @@ ul#page-admin-menu li img {
 }
 .article_list li {
 	padding: 2px 0;
+}
+#articles li img {
+	vertical-align: middle;
 }
 
 /*****************

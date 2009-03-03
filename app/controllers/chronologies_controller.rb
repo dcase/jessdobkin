@@ -28,7 +28,7 @@ class ChronologiesController < ApplicationController
     @page = Page.find(params[:page_id])
     @site_section = @page.site_section
     @chronology = Chronology.new
-    @page_section = PageSection.new
+    @page_section = @chronology.build_page_section
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,29 +38,27 @@ class ChronologiesController < ApplicationController
 
   # GET /chronologies/1/edit
   def edit
-    @page_section = PageSection.find(params[:page_section_id])
+    @chronology = Chronology.find(params[:id])
+    @page_section = @chronology.page_section
     @page = @page_section.page
     @site_section = @page.site_section
-    @chronology = Chronology.find(params[:id])
   end
 
   # POST /chronologies
   # POST /chronologies.xml
   def create
     @chronology = Chronology.new(params[:chronology])
-    @page_section = PageSection.new(params[:page_section])
-    @page_section.content = @chronology
-    @page_section.save
-    @page = @page_section.page
-    @site_section = @page.site_section
+    @page_section = @chronology.build_page_section(params[:page_section])
 
     respond_to do |format|
       if @chronology.save
+        @page = @page_section.page
+        @site_section = @page.site_section
+        
         flash[:notice] = 'Chronology was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @chronology, :status => :created, :location => @chronology }
       else
-        @page_section.destroy
         format.html { render :action => "new" }
         format.xml  { render :xml => @chronology.errors, :status => :unprocessable_entity }
       end
@@ -70,13 +68,13 @@ class ChronologiesController < ApplicationController
   # PUT /chronologies/1
   # PUT /chronologies/1.xml
   def update
-    @page_section = PageSection.find(params[:page_section][:id])
-    @page = @page_section.page
-    @site_section = @page.site_section
     @chronology = Chronology.find(params[:id])
+    @page_section = @chronology.page_section
 
     respond_to do |format|
       if @chronology.update_attributes(params[:chronology]) and @page_section.update_attributes(params[:page_section])
+        @page = @page_section.page
+        @site_section = @page.site_section
         flash[:notice] = 'Chronology was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { head :ok }
@@ -91,13 +89,13 @@ class ChronologiesController < ApplicationController
   # DELETE /chronologies/1.xml
   def destroy
     @chronology = Chronology.find(params[:id])
-    @page_section = PageSection.find(params[:page_section_id])
-    @page = @page_section.page
-    @site_section = @page.site_section
+    @page_section = @chronology.page_section
+    
     @chronology.destroy
-    @page_section.destroy
 
     respond_to do |format|
+      @page = @page_section.page
+      @site_section = @page.site_section
       format.html { redirect_to site_section_page_url(@site_section, @page) }
       format.xml  { head :ok }
     end

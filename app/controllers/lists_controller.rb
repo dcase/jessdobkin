@@ -28,7 +28,7 @@ class ListsController < ApplicationController
     @page = Page.find(params[:page_id])
     @site_section = @page.site_section
     @list = List.new
-    @page_section = PageSection.new
+    @page_section = @list.build_page_section
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,29 +38,28 @@ class ListsController < ApplicationController
 
   # GET /lists/1/edit
   def edit
-    @page_section = PageSection.find(params[:page_section_id])
+    @list = List.find(params[:id])
+    @page_section = @list.page_section
     @page = @page_section.page
     @site_section = @page.site_section
-    @list = List.find(params[:id])
   end
 
   # POST /lists
   # POST /lists.xml
   def create
     @list = List.new(params[:list])
-    @page_section = PageSection.new(params[:page_section])
-    @page_section.content = @list
-    @page_section.save
-    @page = @page_section.page
-    @site_section = @page.site_section
+    @page_section = @list.build_page_section(params[:page_section])
 
     respond_to do |format|
       if @list.save
+        @page = @page_section.page
+        @site_section = @page.site_section
+        
         flash[:notice] = 'List was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @list, :status => :created, :location => @list }
       else
-        @page_section.destroy
+        #@page_section.destroy
         format.html { render :action => "new" }
         format.xml  { render :xml => @list.errors, :status => :unprocessable_entity }
       end
@@ -71,12 +70,13 @@ class ListsController < ApplicationController
   # PUT /lists/1.xml
   def update
     @list = List.find(params[:id])
-    @page_section = PageSection.find(params[:page_section][:id])
-    @page = @page_section.page
-    @site_section = @page.site_section
+    @page_section = @list.page_section
 
     respond_to do |format|
       if @list.update_attributes(params[:list]) and @page_section.update_attributes(params[:page_section])
+        @page = @page_section.page
+        @site_section = @page.site_section
+        
         flash[:notice] = 'List was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { head :ok }
@@ -91,13 +91,14 @@ class ListsController < ApplicationController
   # DELETE /lists/1.xml
   def destroy
     @list = List.find(params[:id])
-    @page_section = PageSection.find(params[:page_section_id])
-    @page = @page_section.page
-    @site_section = @page.site_section
+    @page_section = @list.page_section
+    
     @list.destroy
-    @page_section.destroy
 
     respond_to do |format|
+      @page = @page_section.page
+      @site_section = @page.site_section
+      
       format.html { redirect_to site_section_page_url(@site_section, @page) }
       format.xml  { head :ok }
     end

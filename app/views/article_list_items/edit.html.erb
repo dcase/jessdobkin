@@ -1,8 +1,34 @@
 <h1>Editing Article List Item</h1>
 
-<p>
-  <b>Current Article:</b>
-  <%= image_tag @article_list_item.article.public_filename(:thumb), :alt => @article_list_item.article.alt_text %>
-</p>
 
-<%= render :partial => 'form' %>
+<% form_for([@article_list, @article_list_item], :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+  <%= hidden_field_tag :page_section_id, @page_section.id %>
+
+  <p>
+    <label>Text (uses <a href="http://www.textism.com/tools/textile/" target="_blank">Textile</a>):</label><br /><br />
+    <%= f.text_area :output, :rows => 2 %>
+  </p>
+  <p>
+    <%= f.label 'Links to somewhere else?' %><br />
+    <%= f.check_box :is_link %>
+  </p>
+  <p>
+    <%= f.label 'URL (if link):' %><br />
+    <%= f.text_field :url %>
+  </p>
+  <% unless @article_list_item.articles.empty? %>
+	<h3>Article Pages:</h3>
+	<ol id="articles">
+	  	<%= render :partial => 'article', :collection => @article_list_item.articles %>
+	</ol>
+	<p><%= link_to_function "Add a page" do |page| 
+		page.insert_html :bottom, :articles, :partial => 'article', :object => Article.new 
+		end %></p>
+	<%= sortable_element("articles", :url => { :controller => 'articles', :action => 'order', :article_list_item_id => @article_list_item.id }, :handle => 'article_drag_handle' ) %>
+  <% end %>
+
+  <p>
+    <%= f.submit "Update", :class => 'submit' %> or <%= link_to 'cancel', site_section_page_url(@site_section,@page) %>
+  </p>
+<% end %>

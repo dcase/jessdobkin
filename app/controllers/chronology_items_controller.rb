@@ -27,9 +27,9 @@ class ChronologyItemsController < ApplicationController
   # GET /chronology_items/new
   # GET /chronology_items/new.xml
   def new
-    @page_section = PageSection.find(params[:page_section_id])
     @chronology = Chronology.find(params[:chronology_id])
     @chronology_item = @chronology.chronology_items.build
+    @page_section = @chronology.page_section
 
     respond_to do |format|
       format.js   { render :partial => 'ajax_new' }
@@ -40,19 +40,20 @@ class ChronologyItemsController < ApplicationController
 
   # GET /chronology_items/1/edit
   def edit
-    @page_section = PageSection.find(params[:page_section_id])
-    @page = @page_section.page
-    @site_section = @page.site_section
     @chronology = Chronology.find(params[:chronology_id])
     @chronology_item = @chronology.chronology_items.find(params[:id])
+    @page_section = @chronology.page_section
+    @page = @page_section.page
+    @site_section = @page.site_section
   end
 
   # POST /chronology_items
   # POST /chronology_items.xml
   def create
-    @page_section = PageSection.find(params[:page_section_id])
     @chronology = Chronology.find(params[:chronology_id])
     @chronology_item = @chronology.chronology_items.build(params[:chronology_item])
+    @page_section = @chronology.page_section
+    
 
     respond_to do |format|
       if @chronology_item.save
@@ -74,14 +75,15 @@ class ChronologyItemsController < ApplicationController
   # PUT /chronology_items/1
   # PUT /chronology_items/1.xml
   def update
-    @page_section = PageSection.find(params[:page_section_id])
-    @page = @page_section.page
-    @site_section = @page.site_section
     @chronology = Chronology.find(params[:chronology_id])
     @chronology_item = @chronology.chronology_items.find(params[:id])
+    @page_section = @chronology.page_section
+    
 
     respond_to do |format|
       if @chronology_item.update_attributes(params[:chronology_item])
+        @page = @page_section.page
+        @site_section = @page.site_section
         flash[:notice] = 'ChronologyItem was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.js { render :template => 'page_sections/ajax_success' }
@@ -100,9 +102,10 @@ class ChronologyItemsController < ApplicationController
   # DELETE /chronology_items/1
   # DELETE /chronology_items/1.xml
   def destroy
-    @page_section = PageSection.find(params[:page_section_id])
     @chronology = Chronology.find(params[:chronology_id])
     @chronology_item = @chronology.chronology_items.find(params[:id])
+    @page_section = @chronology.page_section
+    
     @chronology_item.destroy
 
     respond_to do |format|

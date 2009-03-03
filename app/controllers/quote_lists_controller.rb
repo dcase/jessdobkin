@@ -28,7 +28,7 @@ class QuoteListsController < ApplicationController
     @page = Page.find(params[:page_id])
     @site_section = @page.site_section
     @quote_list = QuoteList.new
-    @page_section = PageSection.new
+    @page_section = @quote_list.build_page_section
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,29 +38,26 @@ class QuoteListsController < ApplicationController
 
   # GET /quote_lists/1/edit
   def edit
-    @page_section = PageSection.find(params[:page_section_id])
+    @quote_list = QuoteList.find(params[:id])
+    @page_section = @quote_list.page_section
     @page = @page_section.page
     @site_section = @page.site_section
-    @quote_list = QuoteList.find(params[:id])
   end
 
   # POST /quote_lists
   # POST /quote_lists.xml
   def create
     @quote_list = QuoteList.new(params[:quote_list])
-    @page_section = PageSection.new(params[:page_section])
-    @page_section.content = @quote_list
-    @page_section.save
-    @page = @page_section.page
-    @site_section = @page.site_section
+    @page_section = @quote_list.build_page_section(params[:page_section])
 
     respond_to do |format|
       if @quote_list.save
+        @page = @page_section.page
+        @site_section = @page.site_section
         flash[:notice] = 'QuoteList was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @quote_list, :status => :created, :location => @quote_list }
       else
-        @page_section.destroy
         format.html { render :action => "new" }
         format.xml  { render :xml => @quote_list.errors, :status => :unprocessable_entity }
       end
@@ -71,12 +68,12 @@ class QuoteListsController < ApplicationController
   # PUT /quote_lists/1.xml
   def update
     @quote_list = QuoteList.find(params[:id])
-    @page_section = PageSection.find(params[:page_section][:id])
-    @page = @page_section.page
-    @site_section = @page.site_section
+    @page_section = @quote_list.page_section
 
     respond_to do |format|
       if @quote_list.update_attributes(params[:quote_list]) and @page_section.update_attributes(params[:page_section])
+        @page = @page_section.page
+        @site_section = @page.site_section
         flash[:notice] = 'QuoteList was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { head :ok }
@@ -91,13 +88,13 @@ class QuoteListsController < ApplicationController
   # DELETE /quote_lists/1.xml
   def destroy
     @quote_list = QuoteList.find(params[:id])
-    @page_section = PageSection.find(params[:page_section_id])
-    @page = @page_section.page
-    @site_section = @page.site_section
+    @page_section = @quote_list.page_section
+    
     @quote_list.destroy
-    @page_section.destroy
 
     respond_to do |format|
+      @page = @page_section.page
+      @site_section = @page.site_section
       format.html { redirect_to site_section_page_url(@site_section, @page) }
       format.xml  { head :ok }
     end

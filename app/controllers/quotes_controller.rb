@@ -28,7 +28,7 @@ class QuotesController < ApplicationController
   # GET /quotes/new.xml
   def new
     @quote_list = QuoteList.find(params[:quote_list_id])
-    @page_section = PageSection.find(params[:page_section_id])
+    @page_section = @quote_list.page_section
     @page = @page_section.page
     @site_section = @page.site_section
     @quote = @quote_list.quotes.build
@@ -43,7 +43,7 @@ class QuotesController < ApplicationController
   # GET /quotes/1/edit
   def edit
     @quote_list = QuoteList.find(params[:quote_list_id])
-    @page_section = PageSection.find(params[:page_section_id])
+    @page_section = @quote_list.page_section
     @page = @page_section.page
     @site_section = @page.site_section
     @quote = @quote_list.quotes.find(params[:id])
@@ -54,12 +54,12 @@ class QuotesController < ApplicationController
   def create
     @quote_list = QuoteList.find(params[:quote_list_id])
     @quote = @quote_list.quotes.build(params[:quote])
-    @page_section = PageSection.find(params[:page_section_id])
-    @page = @page_section.page
-    @site_section = @page.site_section
+    @page_section = @quote_list.page_section
 
     respond_to do |format|
       if @quote.save
+        @page = @page_section.page
+        @site_section = @page.site_section
         flash[:notice] = 'Quote was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.js { render :template => 'page_sections/ajax_success' }
@@ -80,7 +80,7 @@ class QuotesController < ApplicationController
   def update
     @quote_list = QuoteList.find(params[:quote_list_id])
     @quote = @quote_list.quotes.find(params[:id])
-    @page_section = PageSection.find(params[:page_section_id])
+    @page_section = @quote_list.page_section
     @page = @page_section.page
     @site_section = @page.site_section
 
@@ -106,7 +106,7 @@ class QuotesController < ApplicationController
   def destroy
     @quote_list = QuoteList.find(params[:quote_list_id])
     @quote = @quote_list.quotes.find(params[:id])
-    @page_section = PageSection.find(params[:page_section_id])
+    @page_section = @quote_list.page_section
     @page = @page_section.page
     @site_section = @page.site_section
     @quote.destroy

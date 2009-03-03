@@ -28,12 +28,12 @@ class ListItemsController < ApplicationController
   # GET /list_items/new
   # GET /list_items/new.xml
   def new
-    @page_section = PageSection.find(params[:page_section_id])
-    @page = @page_section.page
-    @site_section = @page.site_section
     @list = List.find(params[:list_id])
     @list_item = @list.list_items.build
-
+    @page_section = @list.page_section
+    @page = @page_section.page
+    @site_section = @page.site_section
+    
     respond_to do |format|
       format.js   { render :partial => 'ajax_new' }
       format.html # new.html.erb
@@ -43,22 +43,25 @@ class ListItemsController < ApplicationController
 
   # GET /list_items/1/edit
   def edit
-    @page_section = PageSection.find(params[:page_section_id])
-    @page = @page_section.page
-    @site_section = @page.site_section
     @list = List.find(params[:list_id])
     @list_item = @list.list_items.find(params[:id])
+    @page_section = @list.page_section
+    @page = @page_section.page
+    @site_section = @page.site_section
+    
   end
 
   # POST /list_items
   # POST /list_items.xml
   def create
-    @page_section = PageSection.find(params[:page_section_id])
     @list = List.find(params[:list_id])
     @list_item = @list.list_items.build(params[:list_item])
+    @page_section = @list.page_section
 
     respond_to do |format|
       if @list_item.save
+        @page = @page_section.page
+        @site_section = @page.site_section
         flash[:notice] = 'ListItem was successfully created.'
         format.html { redirect_to  site_section_page_url(@site_section, @page) }
         format.js { render :template => 'page_sections/ajax_success' }
@@ -77,14 +80,14 @@ class ListItemsController < ApplicationController
   # PUT /list_items/1
   # PUT /list_items/1.xml
   def update
-    @page_section = PageSection.find(params[:page_section_id])
-    @page = @page_section.page
-    @site_section = @page.site_section
     @list = List.find(params[:list_id])
     @list_item = @list.list_items.find(params[:id])
+    @page_section = @list.page_section
 
     respond_to do |format|
       if @list_item.update_attributes(params[:list_item])
+        @page = @page_section.page
+        @site_section = @page.site_section
         flash[:notice] = 'ListItem was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.js { render :template => 'page_sections/ajax_success' }
@@ -103,14 +106,15 @@ class ListItemsController < ApplicationController
   # DELETE /list_items/1
   # DELETE /list_items/1.xml
   def destroy
-    @page_section = PageSection.find(params[:page_section_id])
-    @page = @page_section.page
-    @site_section = @page.site_section
     @list = List.find(params[:list_id])
     @list_item = @list.list_items.find(params[:id])
+    @page_section = @list.page_section
+    
     @list_item.destroy
 
     respond_to do |format|
+      @page = @page_section.page
+      @site_section = @page.site_section
       format.html { redirect_to site_section_page_url(@site_section, @page) }
       format.js { render :template => 'page_sections/ajax_success' }
       format.xml  { head :ok }

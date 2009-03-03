@@ -29,7 +29,7 @@ class ArticleListsController < ApplicationController
     @page = Page.find(params[:page_id])
     @site_section = @page.site_section
     @article_list = ArticleList.new
-    @page_section = PageSection.new
+    @page_section = @article_list.build_page_section
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,24 +39,24 @@ class ArticleListsController < ApplicationController
 
   # GET /article_lists/1/edit
   def edit
-    @page_section = PageSection.find(params[:page_section_id])
+    @article_list = ArticleList.find(params[:id])
+    @page_section = @article_list.page_section
     @page = @page_section.page
     @site_section = @page.site_section
-    @article_list = ArticleList.find(params[:id])
+    
   end
 
   # POST /article_lists
   # POST /article_lists.xml
   def create
     @article_list = ArticleList.new(params[:article_list])
-    @page_section = PageSection.new(params[:page_section])
-    @page_section.content = @article_list
-    @page_section.save
-    @page = Page.find(params[:page_section][:page_id])
-    @site_section = @page.site_section
+    @page_section = @article_list.build_page_section(params[:page_section])
 
     respond_to do |format|
       if @article_list.save
+        @page = @page_section.page
+        @site_section = @page.site_section
+        
         flash[:notice] = 'ArticleList was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @article_list, :status => :created, :location => @article_list }
@@ -71,13 +71,14 @@ class ArticleListsController < ApplicationController
   # PUT /article_lists/1
   # PUT /article_lists/1.xml
   def update
-    @page_section = PageSection.find(params[:page_section][:id])
-    @page = @page_section.page
-    @site_section = @page.site_section
     @article_list = ArticleList.find(params[:id])
+    @page_section =  @article_list.page_section
 
     respond_to do |format|
       if @article_list.update_attributes(params[:article_list]) and @page_section.update_attributes(params[:page_section])
+        @page = @page_section.page
+        @site_section = @page.site_section
+        
         flash[:notice] = 'ArticleList was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { head :ok }
@@ -92,13 +93,13 @@ class ArticleListsController < ApplicationController
   # DELETE /article_lists/1.xml
   def destroy
     @article_list = ArticleList.find(params[:id])
-    @page_section = PageSection.find(params[:page_section_id])
-    @page = @page_section.page
-    @site_section = @page.site_section
+    @page_section = @article_list.page_section
     @article_list.destroy
-    @page_section.destroy
+
 
     respond_to do |format|
+      @page = @page_section.page
+      @site_section = @page.site_section
       format.html { redirect_to site_section_page_url(@site_section, @page) }
       format.xml  { head :ok }
     end

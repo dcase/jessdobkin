@@ -28,7 +28,15 @@ function bindAllAnchorsToToggleActiveOnClick() {
 		a.observe('click', toggleActive)
 	});
 }
+function addTargetToLink(class_array) {
+	$A(class_array).each( function(class) {
+		$$(class + ' a').each(function(e) {
+			e.writeAttribute('target','_blank');
+		});
+	});
+}
 
 Event.observe(window, 'load', function() {
 	bindAllAnchorsToToggleActiveOnClick();
+
 })

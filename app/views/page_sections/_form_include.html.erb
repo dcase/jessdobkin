@@ -1,7 +1,6 @@
 <% fields_for :page_section do |page| %>
   <%= page.error_messages %>
   <%= page.hidden_field :page_id, :value => params[:page_id] %>
-  <%= page.hidden_field :id %>
   <p>
     <%= page.label 'Section Title' %><br />
     <%= page.text_field :title %>

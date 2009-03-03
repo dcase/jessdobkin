@@ -51,6 +51,7 @@
 								end %>
 				<% end %>
 			</li>
+			<li><%= link_to_function 'Toggle content (makes re-ordering sections easier)' do |page| page.select('.content').invoke('toggle') end %></li>
 		<% end %>
 		<% if authorized_preview? %>
 			<li><%= image_tag 'fail.png', :size => "16x16" %><%= link_to 'Turn off preview', :controller => 'pages', :action => 'show', :id => @page, :site_section_id => @site_section %></li>

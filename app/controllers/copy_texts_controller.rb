@@ -29,7 +29,7 @@ class CopyTextsController < ApplicationController
     @page = Page.find(params[:page_id])
     @site_section = @page.site_section
     @copy_text = CopyText.new
-    @page_section = PageSection.new
+    @page_section = @copy_text.build_page_section
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,29 +39,27 @@ class CopyTextsController < ApplicationController
 
   # GET /copy_texts/1/edit
   def edit
-    @page_section = PageSection.find(params[:page_section_id])
+    @copy_text = CopyText.find(params[:id])
+    @page_section = @copy_text.page_section
     @page = @page_section.page
     @site_section = @page.site_section
-    @copy_text = CopyText.find(params[:id])
+    
   end
 
   # POST /copy_texts
   # POST /copy_texts.xml
   def create
     @copy_text = CopyText.new(params[:copy_text])
-    @page_section = PageSection.new(params[:page_section])
-    @page_section.content = @copy_text
-    @page_section.save
-    @page = @page_section.page
-    @site_section = @page.site_section
+    @page_section = @copy_text.build_page_section(params[:page_section])
 
     respond_to do |format|
       if @copy_text.save
+        @page = @page_section.page
+        @site_section = @page.site_section
         flash[:notice] = 'CopyText was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @copy_text, :status => :created, :location => @copy_text }
       else
-        @page_section.destroy
         format.html { render :action => "new" }
         format.xml  { render :xml => @copy_text.errors, :status => :unprocessable_entity }
       end
@@ -71,13 +69,13 @@ class CopyTextsController < ApplicationController
   # PUT /copy_texts/1
   # PUT /copy_texts/1.xml
   def update
-    @page_section = PageSection.find(params[:page_section][:id])
-    @page = @page_section.page
-    @site_section = @page.site_section
     @copy_text = CopyText.find(params[:id])
+    @page_section = @copy_text.page_section
 
     respond_to do |format|
       if @copy_text.update_attributes(params[:copy_text]) and @page_section.update_attributes(params[:page_section])
+        @page = @page_section.page
+        @site_section = @page.site_section
         flash[:notice] = 'CopyText was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { head :ok }
@@ -92,13 +90,13 @@ class CopyTextsController < ApplicationController
   # DELETE /copy_texts/1.xml
   def destroy
     @copy_text = CopyText.find(params[:id])
-    @page_section = PageSection.find(params[:page_section_id])
-    @page = @page_section.page
-    @site_section = @page.site_section
+    @page_section = @copy_text.page_section
+    
     @copy_text.destroy
-    @page_section.destroy
 
     respond_to do |format|
+      @page = @page_section.page
+      @site_section = @page.site_section
       format.html { redirect_to site_section_page_url(@site_section, @page) }
       format.xml  { head :ok }
     end

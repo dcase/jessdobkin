@@ -9,7 +9,7 @@
 	<%= link_to_remote "Add item", :url => { :controller => 'quotes', :action => 'new', :quote_list_id => @quote_list, :page_section_id => @page_section }, :method => :get, :update => "quote_form_container" %>
 	<div id="quote_form_container"></div>
 <% end %>
-<% div_for(@quote_list) do %>
+<% div_for(@quote_list, :class => 'content') do %>
 	<% for item in @quote_list.quotes %>
 		<% div_for(item) do %>
 			<% if authorized? %>
