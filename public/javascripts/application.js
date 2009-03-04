@@ -19,13 +19,13 @@ function resetAllAnchorsToInactive() {
 		if( a.hasClassName('active')) {
 			a.removeClassName('active');
 		}
-	})
+	});
 }
 
 function bindAllAnchorsToToggleActiveOnClick() {
 	anchors = $$('.article_list a');
 	anchors.each( function(a) {
-		a.observe('click', toggleActive)
+		a.observe('click', toggleActive);
 	});
 }
 function addTargetToLink(class_array) {
@@ -38,5 +38,4 @@ function addTargetToLink(class_array) {
 
 Event.observe(window, 'load', function() {
 	bindAllAnchorsToToggleActiveOnClick();
-
-})
+});
