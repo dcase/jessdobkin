@@ -16,3 +16,12 @@
 <% end %>
 //-->
 </script>
+<!--[if lt IE 7]>
+<script type="text/javascript">
+	<% if @for_section %>
+		$('scroll_buttons<%= ( @for_section ? '_' + @page_section.id.to_s : '' )%>').setStyle({position: 'absolute', left: ( $('page_section_<%= @page_section.id %>').getWidth() + 25) + 'px', top: ( $('page_section_<%= @page_section.id %>').getHeight() - 30) + 'px'});
+	<% else %>
+		$('scroll_buttons<%= ( @for_section ? '_' + @page_section.id.to_s : '' )%>').setStyle({position: 'absolute', right: '0px', bottom: '0px'});
+	<% end %>
+</script>
+<![endif]-->
