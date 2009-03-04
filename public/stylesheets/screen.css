@@ -463,12 +463,13 @@ ul#page-admin-menu li img {
 	height: 515px;
 	overflow: auto;
 	position: relative;
-	z-index: 99;
+	z-index: 2;
 }
 #work-scroll-buttons {
 	position: relative;
 	top: -30px;
 	left: 600px;
+	z-index: 3;
 }
 #earlier_work_thumbs_wrapper,
 #earlier_work_thumbs_wrapper {
