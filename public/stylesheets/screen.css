@@ -462,11 +462,18 @@ ul#page-admin-menu li img {
 #work-scroll {
 	height: 515px;
 	overflow: auto;
+	position: relative;
+	z-index: 99;
 }
 #work-scroll-buttons {
 	position: relative;
 	top: -30px;
 	left: 600px;
+}
+#earlier_work_thumbs_wrapper,
+#earlier_work_thumbs_wrapper {
+	position: relative;
+	z-index: 1;
 }
 #work_thumbs_wrapper div.work,
 #work_thumbs_wrapper div.work_photo,
