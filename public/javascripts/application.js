@@ -29,8 +29,8 @@ function bindAllAnchorsToToggleActiveOnClick() {
 	});
 }
 function addTargetToLink(class_array) {
-	$A(class_array).each( function(class) {
-		$$(class + ' a').each(function(e) {
+	$A(class_array).each( function(class_name) {
+		$$(class_name + ' a').each(function(e) {
 			e.writeAttribute('target','_blank');
 		});
 	});
