@@ -5,16 +5,16 @@
 	<%= link_to( image_tag("fail.png", :size => "16x16"), { :controller => 'quote_lists', :action => 'destroy', :id => @quote_list, :page_section_id => @page_section}, {:confirm => 'Are you sure?', :method => :delete, :title => "Delete"}) %>
 	<%= link_to( 'delete list', { :controller => 'quote_lists', :action => 'destroy', :id => @quote_list, :page_section_id => @page_section}, {:confirm => 'Are you sure?', :method => :delete, :title => "Delete"}) %>
 	<br />
-	<%= link_to_remote image_tag("add.png", :size => "16x16"), :url => { :controller => 'quotes', :action => 'new', :quote_list_id => @quote_list, :page_section_id => @page_section }, :method => :get, :update => "quote_form_container" %>
-	<%= link_to_remote "Add item", :url => { :controller => 'quotes', :action => 'new', :quote_list_id => @quote_list, :page_section_id => @page_section }, :method => :get, :update => "quote_form_container" %>
-	<div id="quote_form_container"></div>
+	<%= link_to_remote image_tag("add.png", :size => "16x16"), :url => { :controller => 'quotes', :action => 'new', :quote_list_id => @quote_list, :page_section_id => @page_section }, :method => :get, :update => "quote_form_container_#{@quote_list.id}" %>
+	<%= link_to_remote "Add item", :url => { :controller => 'quotes', :action => 'new', :quote_list_id => @quote_list, :page_section_id => @page_section }, :method => :get, :update => "quote_form_container_#{@quote_list.id}" %>
+	<div id="quote_form_container_<%= @quote_list.id %>"></div>
 <% end %>
 <% div_for(@quote_list, :class => 'content') do %>
 	<% for item in @quote_list.quotes %>
 		<% div_for(item) do %>
 			<% if authorized? %>
 				<%= image_tag("drag_handle.png", :size => "16x16", :class => "quote_drag_handle") %>
-				<%= link_to_remote( image_tag("pencil.png", :size => "16x16"), :url => { :controller => 'quotes', :action => 'edit', :id => item, :quote_list_id => @quote_list, :page_section_id => @page_section }, :method => :get, :title => "Edit", :update => "quote_form_container") %>
+				<%= link_to_remote( image_tag("pencil.png", :size => "16x16"), :url => { :controller => 'quotes', :action => 'edit', :id => item, :quote_list_id => @quote_list, :page_section_id => @page_section }, :method => :get, :title => "Edit", :update => "quote_form_container_#{@quote_list.id}") %>
 				<%= link_to_remote( image_tag("fail.png", :size => "16x16"), :url => { :controller => 'quotes', :action => 'destroy', :id => item, :quote_list_id => @quote_list, :page_section_id => @page_section  }, :confirm => 'Are you sure?', :method => :delete, :title => "Delete" )%>
 				<br />
 			<% end %>

@@ -68,7 +68,7 @@ class ListItemsController < ApplicationController
         format.xml  { render :xml => @list_item, :status => :created, :location => @list_item }
       else
         format.js { render :update do |page|
-          page.replace_html "list_item_form_container", :partial => 'ajax_new', :list_id => @list, :page_section_id => @page_section
+          page.replace_html "list_item_form_container_#{@list.id}", :partial => 'ajax_new', :list_id => @list, :page_section_id => @page_section
         end
         }
         format.html { render :action => "new" }
@@ -94,7 +94,7 @@ class ListItemsController < ApplicationController
         format.xml  { head :ok }
       else
         format.js { render :update do |page|
-          page.replace_html "list_item_form_container", :partial => 'ajax_new', :list_id => @list, :page_section_id => @page_section
+          page.replace_html "list_item_form_container_#{@list.id}", :partial => 'ajax_new', :list_id => @list, :page_section_id => @page_section
         end
         }
         format.html { render :action => "edit" }

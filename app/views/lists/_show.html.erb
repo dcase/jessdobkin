@@ -5,16 +5,16 @@
 	<%= link_to( image_tag("fail.png", :size => "16x16"), { :controller => 'lists', :action => 'destroy', :id => @list, :page_section_id => @page_section}, {:confirm => 'Are you sure?', :method => :delete, :title => "Delete"}) %>
 	<%= link_to( 'delete list', { :controller => 'lists', :action => 'destroy', :id => @list, :page_section_id => @page_section}, {:confirm => 'Are you sure?', :method => :delete, :title => "Delete"}) %>
 	<br />
-	<%= link_to_remote image_tag("add.png", :size => "16x16"), :url => { :controller => 'list_items', :action => 'new', :list_id => @list, :page_section_id => @page_section }, :method => :get, :update => "list_item_form_container" %>
-	<%= link_to_remote "Add item", :url => { :controller => 'list_items', :action => 'new', :list_id => @list, :page_section_id => @page_section }, :method => :get, :update => "list_item_form_container" %>
-	<div id="list_item_form_container"></div>
+	<%= link_to_remote image_tag("add.png", :size => "16x16"), :url => { :controller => 'list_items', :action => 'new', :list_id => @list, :page_section_id => @page_section }, :method => :get, :update => "list_item_form_container_#{@list.id}" %>
+	<%= link_to_remote "Add item", :url => { :controller => 'list_items', :action => 'new', :list_id => @list, :page_section_id => @page_section }, :method => :get, :update => "list_item_form_container_#{@list.id}" %>
+	<div id="list_item_form_container_<%= @list.id %>"></div>
 <% end %>
 <% content_tag_for(:ul, @list, :class => 'content') do %>
 	<% for item in @list.list_items %>
 		<% content_tag_for(:li, item) do %>
 			<% if authorized? %>
 				<%= image_tag("drag_handle.png", :size => "16x16", :class => "list_item_drag_handle") %>
-				<%= link_to_remote( image_tag("pencil.png", :size => "16x16"), :url => { :controller => 'list_items', :action => 'edit', :id => item, :list_id => @list, :page_section_id => @page_section }, :method => :get, :title => "Edit", :update => "list_item_form_container") %>
+				<%= link_to_remote( image_tag("pencil.png", :size => "16x16"), :url => { :controller => 'list_items', :action => 'edit', :id => item, :list_id => @list, :page_section_id => @page_section }, :method => :get, :title => "Edit", :update => "list_item_form_container_#{@list.id}") %>
 				<%= link_to_remote( image_tag("fail.png", :size => "16x16"), :url => { :controller => 'list_items', :action => 'destroy', :id => item, :list_id => @list, :page_section_id => @page_section  }, :confirm => 'Are you sure?', :method => :delete, :title => "Delete" )%>
 			<% end %>
 			<%= textilize_without_paragraph(item.output) %>

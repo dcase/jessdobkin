@@ -63,7 +63,7 @@ class ChronologyItemsController < ApplicationController
         format.xml  { render :xml => @chronology_item, :status => :created, :location => @chronology_item }
       else
         format.js { render :update do |page|
-          page.replace_html "chronology_item_form_container", :partial => 'ajax_new', :chronology_id => @chronology, :page_section_id => @page_section
+          page.replace_html "chronology_item_form_container_#{@chronology.id}", :partial => 'ajax_new', :chronology_id => @chronology, :page_section_id => @page_section
         end
         }
         format.html { render :action => "new" }
@@ -91,7 +91,7 @@ class ChronologyItemsController < ApplicationController
       else
         format.html { render :action => "edit" }
         format.js { render :update do |page|
-          page.replace_html "chronology_item_form_container", :partial => 'ajax_edit', :chronology_id => @chronology, :page_section_id => @page_section
+          page.replace_html "chronology_item_form_container_#{@chronology.id}", :partial => 'ajax_edit', :chronology_id => @chronology, :page_section_id => @page_section
         end
         }
         format.xml  { render :xml => @chronology_item.errors, :status => :unprocessable_entity }

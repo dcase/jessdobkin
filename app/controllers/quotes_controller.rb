@@ -66,7 +66,7 @@ class QuotesController < ApplicationController
         format.xml  { render :xml => @quote, :status => :created, :location => @quote }
       else
         format.js { render :update do |page|
-          page.replace_html "quote_form_container", :partial => 'ajax_new', :quote_list_id => @quote_list, :page_section_id => @page_section
+          page.replace_html "quote_form_container_#{@quote_list.id}", :partial => 'ajax_new', :quote_list_id => @quote_list, :page_section_id => @page_section
         end
         }
         format.html { render :action => "new" }
@@ -92,7 +92,7 @@ class QuotesController < ApplicationController
         format.xml  { head :ok }
       else
         format.js { render :update do |page|
-          page.replace_html "list_item_form_container", :partial => 'ajax_new', :list_id => @list, :page_section_id => @page_section
+          page.replace_html "quote_form_container_#{@quote_list.id}", :partial => 'ajax_new', :list_id => @list, :page_section_id => @page_section
         end
         }
         format.html { render :action => "edit" }

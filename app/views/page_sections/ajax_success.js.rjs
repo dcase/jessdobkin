@@ -2,7 +2,6 @@ if @page_section.has_scroll?
   page.remove("scroll_buttons_#{@page_section.id}")
 end
 page.replace("page_section_#{@page_section.id}", 
-  :partial => 'page_sections/show', 
-  :locals => { :quote_list => @quote_list},
+  :partial => 'page_sections/show',
   :object => @page_section )
 flash.discard
