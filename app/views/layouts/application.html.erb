@@ -34,7 +34,7 @@ end if @site_section
 	<%= stylesheet_link_tag 'ie6' %>
 	<![endif]-->
 
-	<%= javascript_include_tag 'protoaculous','class-scroll','flowplayer','lightbox','application', :cache => true %>
+	<%= javascript_include_tag 'protoaculous','class-scroll','flowplayer','lightbox','application' %>
 	<% if !authorized? or authorized_preview? %>
 		<script type="text/javascript">
 		document.observe("dom:loaded",function(){
