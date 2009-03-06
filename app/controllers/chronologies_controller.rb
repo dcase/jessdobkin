@@ -49,12 +49,12 @@ class ChronologiesController < ApplicationController
   def create
     @chronology = Chronology.new(params[:chronology])
     @page_section = @chronology.build_page_section(params[:page_section])
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @chronology.save
-        @page = @page_section.page
-        @site_section = @page.site_section
-        
         flash[:notice] = 'Chronology was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @chronology, :status => :created, :location => @chronology }
@@ -70,11 +70,12 @@ class ChronologiesController < ApplicationController
   def update
     @chronology = Chronology.find(params[:id])
     @page_section = @chronology.page_section
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @chronology.update_attributes(params[:chronology]) and @page_section.update_attributes(params[:page_section])
-        @page = @page_section.page
-        @site_section = @page.site_section
         flash[:notice] = 'Chronology was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { head :ok }
@@ -92,10 +93,11 @@ class ChronologiesController < ApplicationController
     @page_section = @chronology.page_section
     
     @chronology.destroy
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
-      @page = @page_section.page
-      @site_section = @page.site_section
       format.html { redirect_to site_section_page_url(@site_section, @page) }
       format.xml  { head :ok }
     end

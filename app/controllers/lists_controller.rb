@@ -49,12 +49,12 @@ class ListsController < ApplicationController
   def create
     @list = List.new(params[:list])
     @page_section = @list.build_page_section(params[:page_section])
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @list.save
-        @page = @page_section.page
-        @site_section = @page.site_section
-        
         flash[:notice] = 'List was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @list, :status => :created, :location => @list }
@@ -71,12 +71,12 @@ class ListsController < ApplicationController
   def update
     @list = List.find(params[:id])
     @page_section = @list.page_section
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @list.update_attributes(params[:list]) and @page_section.update_attributes(params[:page_section])
-        @page = @page_section.page
-        @site_section = @page.site_section
-        
         flash[:notice] = 'List was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { head :ok }
@@ -94,11 +94,11 @@ class ListsController < ApplicationController
     @page_section = @list.page_section
     
     @list.destroy
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
-      @page = @page_section.page
-      @site_section = @page.site_section
-      
       format.html { redirect_to site_section_page_url(@site_section, @page) }
       format.xml  { head :ok }
     end

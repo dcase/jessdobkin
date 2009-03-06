@@ -49,11 +49,12 @@ class QuoteListsController < ApplicationController
   def create
     @quote_list = QuoteList.new(params[:quote_list])
     @page_section = @quote_list.build_page_section(params[:page_section])
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @quote_list.save
-        @page = @page_section.page
-        @site_section = @page.site_section
         flash[:notice] = 'QuoteList was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @quote_list, :status => :created, :location => @quote_list }
@@ -69,11 +70,12 @@ class QuoteListsController < ApplicationController
   def update
     @quote_list = QuoteList.find(params[:id])
     @page_section = @quote_list.page_section
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @quote_list.update_attributes(params[:quote_list]) and @page_section.update_attributes(params[:page_section])
-        @page = @page_section.page
-        @site_section = @page.site_section
         flash[:notice] = 'QuoteList was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { head :ok }
@@ -91,10 +93,11 @@ class QuoteListsController < ApplicationController
     @page_section = @quote_list.page_section
     
     @quote_list.destroy
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
-      @page = @page_section.page
-      @site_section = @page.site_section
       format.html { redirect_to site_section_page_url(@site_section, @page) }
       format.xml  { head :ok }
     end

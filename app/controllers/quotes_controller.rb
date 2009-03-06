@@ -55,11 +55,12 @@ class QuotesController < ApplicationController
     @quote_list = QuoteList.find(params[:quote_list_id])
     @quote = @quote_list.quotes.build(params[:quote])
     @page_section = @quote_list.page_section
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @quote.save
-        @page = @page_section.page
-        @site_section = @page.site_section
         flash[:notice] = 'Quote was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.js { render :template => 'page_sections/ajax_success' }

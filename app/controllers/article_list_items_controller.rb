@@ -63,11 +63,12 @@ class ArticleListItemsController < ApplicationController
     @page_section = @article_list.page_section
     
     @article_list_item = @article_list.article_list_items.build(params[:article_list_item])
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @article_list_item.save
-         @page = @page_section.page
-          @site_section = @page.site_section
         flash[:notice] = 'ArticleListItem was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.js { render :template => 'page_sections/ajax_success' }
@@ -86,11 +87,12 @@ class ArticleListItemsController < ApplicationController
     @page_section = @article_list.page_section
     
     @article_list_item = @article_list.article_list_items.find(params[:id])
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @article_list_item.update_attributes(params[:article_list_item])
-        @page = @page_section.page
-        @site_section = @page.site_section
         flash[:notice] = 'ArticleListItem was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.js { render :template => 'page_sections/ajax_success' }

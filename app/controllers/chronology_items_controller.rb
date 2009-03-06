@@ -79,11 +79,11 @@ class ChronologyItemsController < ApplicationController
     @chronology_item = @chronology.chronology_items.find(params[:id])
     @page_section = @chronology.page_section
     
-
+    @page = @page_section.page
+    @site_section = @page.site_section
+    
     respond_to do |format|
       if @chronology_item.update_attributes(params[:chronology_item])
-        @page = @page_section.page
-        @site_section = @page.site_section
         flash[:notice] = 'ChronologyItem was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.js { render :template => 'page_sections/ajax_success' }

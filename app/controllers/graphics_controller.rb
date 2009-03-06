@@ -49,11 +49,12 @@ class GraphicsController < ApplicationController
   def create
     @graphic = Graphic.new(params[:graphic])
     @page_section = @graphic.build_page_section(params[:page_section])
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @graphic.save
-        @page = @page_section.page
-        @site_section = @page.site_section
         flash[:notice] = 'Graphic was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @graphic, :status => :created, :location => @graphic }
@@ -69,11 +70,12 @@ class GraphicsController < ApplicationController
   def update
     @graphic = Graphic.find(params[:id])
     @page_section = @graphic.page_section
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @graphic.update_attributes(params[:graphic]) and @page_section.update_attributes(params[:page_section])
-        @page = @page_section.page
-        @site_section = @page.site_section
         flash[:notice] = 'Graphic was successfully updated.'
         format.html { redirect_to(@graphic) }
         format.xml  { head :ok }
@@ -91,10 +93,11 @@ class GraphicsController < ApplicationController
     @page_section = @graphic.page_section
     
     @graphic.destroy
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
-      @page = @page_section.page
-      @site_section = @page.site_section
       format.html { redirect_to site_section_page_url(@site_section, @page) }
       format.xml  { head :ok }
     end

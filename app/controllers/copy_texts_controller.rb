@@ -51,11 +51,12 @@ class CopyTextsController < ApplicationController
   def create
     @copy_text = CopyText.new(params[:copy_text])
     @page_section = @copy_text.build_page_section(params[:page_section])
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @copy_text.save
-        @page = @page_section.page
-        @site_section = @page.site_section
         flash[:notice] = 'CopyText was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @copy_text, :status => :created, :location => @copy_text }
@@ -71,11 +72,12 @@ class CopyTextsController < ApplicationController
   def update
     @copy_text = CopyText.find(params[:id])
     @page_section = @copy_text.page_section
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @copy_text.update_attributes(params[:copy_text]) and @page_section.update_attributes(params[:page_section])
-        @page = @page_section.page
-        @site_section = @page.site_section
         flash[:notice] = 'CopyText was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { head :ok }
@@ -93,10 +95,11 @@ class CopyTextsController < ApplicationController
     @page_section = @copy_text.page_section
     
     @copy_text.destroy
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
-      @page = @page_section.page
-      @site_section = @page.site_section
       format.html { redirect_to site_section_page_url(@site_section, @page) }
       format.xml  { head :ok }
     end

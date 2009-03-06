@@ -51,12 +51,12 @@ class ArticleListsController < ApplicationController
   def create
     @article_list = ArticleList.new(params[:article_list])
     @page_section = @article_list.build_page_section(params[:page_section])
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @article_list.save
-        @page = @page_section.page
-        @site_section = @page.site_section
-        
         flash[:notice] = 'ArticleList was successfully created.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { render :xml => @article_list, :status => :created, :location => @article_list }
@@ -73,12 +73,12 @@ class ArticleListsController < ApplicationController
   def update
     @article_list = ArticleList.find(params[:id])
     @page_section =  @article_list.page_section
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
     respond_to do |format|
       if @article_list.update_attributes(params[:article_list]) and @page_section.update_attributes(params[:page_section])
-        @page = @page_section.page
-        @site_section = @page.site_section
-        
         flash[:notice] = 'ArticleList was successfully updated.'
         format.html { redirect_to site_section_page_url(@site_section, @page) }
         format.xml  { head :ok }
@@ -95,11 +95,12 @@ class ArticleListsController < ApplicationController
     @article_list = ArticleList.find(params[:id])
     @page_section = @article_list.page_section
     @article_list.destroy
+    
+    @page = @page_section.page
+    @site_section = @page.site_section
 
 
     respond_to do |format|
-      @page = @page_section.page
-      @site_section = @page.site_section
       format.html { redirect_to site_section_page_url(@site_section, @page) }
       format.xml  { head :ok }
     end
