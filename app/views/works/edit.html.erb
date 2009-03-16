@@ -33,9 +33,12 @@
   </p>
   <% fields_for :work_thumbnail do |t| %>
 		<%= t.error_messages %>
+	<% if @work.work_thumbnail %>
 	  <p>
 		Current Thumbnail:
 		<%= image_tag @work.work_thumbnail.public_filename %>
+	  </p>
+	<% end %>
 	  <p>
 	    <%= t.label 'Thumbnail' %><br />
 	    <%= t.file_field :uploaded_data %>
