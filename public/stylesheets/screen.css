@@ -672,7 +672,7 @@ p#submit input {
 	top: -10px;
 }
 #scroll_buttons_27 {
-	left: 285px;
+	left: 285px !important;
 }
 
 /** News **/
