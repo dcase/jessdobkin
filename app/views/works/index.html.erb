@@ -22,7 +22,7 @@
 					}
 				});
 		}",
-		:onChange => :onUpdate ) if authorized? %>
+		:onChange => 'this.onUpdate' ) if authorized? %>
 	<% unless @earlier_works.blank? %>
 		<div id="earlier_work_thumbs_wrapper">
 			<h3>earlier works</h3>
@@ -48,7 +48,7 @@
 						}
 					});
 			}",
-			:onChange => :onUpdate ) if authorized? %>
+			:onChange => 'this.onUpdate' ) if authorized? %>
 	<% end %>
 </div><!-- end 'work-scroll' -->
 <div id="work-scroll-buttons" class="scroll_buttons">
