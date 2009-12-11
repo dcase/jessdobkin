@@ -1,6 +1,6 @@
 <div id="work-scroll">
 	<div id="work_thumbs_wrapper">
-		<% @works.each_with_index do |i,work| %>
+		<% @works.each_with_index do |work,i| %>
 			<% div_for(work, :style => ((i+1)%4 == 0 ? "clear: left;":"")) do %>
 				<div><%= link_to image_tag(work.work_thumbnail.public_filename, :size => "#{work.work_thumbnail.width}x#{work.work_thumbnail.height}"), work if work.work_thumbnail %></div>
 				<div><%= link_to work.title, work %></div>
@@ -13,7 +13,7 @@
 	<% unless @earlier_works.blank? %>
 		<div id="earlier_work_thumbs_wrapper">
 			<h3>earlier works</h3>
-			<% @earlier_works.each_with_index do |i,work| %>
+			<% @earlier_works.each_with_index do |work,i| %>
 				<% div_for(work, :style => ((i+1)%4 == 0 ? "clear: left;":"")) do %>
 					<div><%= link_to image_tag(work.work_thumbnail.public_filename, :size => "#{work.work_thumbnail.width}x#{work.work_thumbnail.height}"), work %></div>
 					<div><%= link_to work.title, work %></div>
