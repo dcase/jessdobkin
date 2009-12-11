@@ -459,6 +459,9 @@ ul#page-admin-menu li img {
 /*****************
 * Work
 ******************/
+.first-in-row {
+	clear: left;
+}
 #work-scroll {
 	height: 530px;
 	overflow: auto;

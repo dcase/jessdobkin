@@ -1,7 +1,7 @@
 <div id="work-scroll">
 	<div id="work_thumbs_wrapper">
 		<% @works.each_with_index do |work,i| %>
-			<% options =  i%4==0 ? { :style => "clear: left;" } : {} %>
+			<% options =  i%4==0 ? { :class => "first-in-row" } : {} %>
 			<% div_for(work, options) do %>
 				<div><%= link_to image_tag(work.work_thumbnail.public_filename, :size => "#{work.work_thumbnail.width}x#{work.work_thumbnail.height}"), work if work.work_thumbnail %></div>
 				<div><%= link_to work.title, work %></div>
@@ -10,12 +10,22 @@
 			<% end %>
 		<% end %>
 	</div>
-	<%= sortable_element("work_thumbs_wrapper", :url => { :controller => 'works', :action => 'order', :container_id => "work_thumbs_wrapper"}, :tag => 'div', :handle => 'work_drag_handle' ) if authorized? %>
+	<%= sortable_element("work_thumbs_wrapper", :url => { :controller => 'works', :action => 'order', :container_id => "work_thumbs_wrapper"}, 
+		:tag => 'div', 
+		:handle => 'work_drag_handle', 
+		:onUpdate => "function(container) {
+			$$('#works_thumb_wrapper div.work).each( function(e, i) { 
+				e.removeClassName('first-in-row');
+				if (i%4==0) { 
+					e.addClassName('first-in-row');
+					}
+				});
+		}" ) if authorized? %>
 	<% unless @earlier_works.blank? %>
 		<div id="earlier_work_thumbs_wrapper">
 			<h3>earlier works</h3>
 			<% @earlier_works.each_with_index do |work,i| %>
-				<% options =  i%4==0 ? { :style => "clear: left;" } : {} %>
+				<% options =  i%4==0 ? { :class => "first-in-row" } : {} %>
 				<% div_for(work, options) do %>
 					<div><%= link_to image_tag(work.work_thumbnail.public_filename, :size => "#{work.work_thumbnail.width}x#{work.work_thumbnail.height}"), work %></div>
 					<div><%= link_to work.title, work %></div>
@@ -24,7 +34,17 @@
 				<% end %>
 			<% end %>
 		</div>
-		<%= sortable_element("earlier_work_thumbs_wrapper", :url => { :controller => 'works', :action => 'order', :container_id => "earlier_work_thumbs_wrapper"}, :tag => 'div', :handle => 'earlier_work_drag_handle' ) if authorized? %>
+		<%= sortable_element("earlier_work_thumbs_wrapper", :url => { :controller => 'works', :action => 'order', :container_id => "earlier_work_thumbs_wrapper"}, 
+			:tag => 'div', 
+			:handle => 'earlier_work_drag_handle',
+			:onUpdate => "function(container) {
+				$$('#earlier_works_thumb_wrapper div.work).each( function(e, i) { 
+					e.removeClassName('first-in-row');
+					if (i%4==0) { 
+						e.addClassName('first-in-row');
+						}
+					});
+			}" ) if authorized? %>
 	<% end %>
 </div><!-- end 'work-scroll' -->
 <div id="work-scroll-buttons" class="scroll_buttons">
