@@ -49,7 +49,7 @@
 		<%= @work.date_start.year %><%= if @work.is_ongoing then "-ongoing" elsif !@work.date_end.blank? then "-" + @work.date_end.year.to_s end %>
 	</div>
 	<div id="description">
-		<%=h @work.description %>
+		<%= textilize_without_paragraph(@work.description) %>
 	</div>
 	<% unless @work.video.blank? %>
 		<div id="video_link">
