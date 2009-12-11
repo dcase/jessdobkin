@@ -14,7 +14,7 @@
 		:tag => 'div', 
 		:handle => 'work_drag_handle', 
 		:onUpdate => "function(container) {
-			$$('#works_thumb_wrapper div.work').each( function(e, i) { 
+			$$('#work_thumbs_wrapper div.work').each( function(e, i) { 
 				e.removeClassName('first-in-row');
 				if (i%4==0) { 
 					e.addClassName('first-in-row');
@@ -38,7 +38,7 @@
 			:tag => 'div', 
 			:handle => 'earlier_work_drag_handle',
 			:onUpdate => "function(container) {
-				$$('#earlier_works_thumb_wrapper div.work').each( function(e, i) { 
+				$$('#earlier_work_thumbs_wrapper div.work').each( function(e, i) { 
 					e.removeClassName('first-in-row');
 					if (i%4==0) { 
 						e.addClassName('first-in-row');
