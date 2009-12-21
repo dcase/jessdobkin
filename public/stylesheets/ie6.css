@@ -1,13 +1,15 @@
 img {behavior: url(/javascripts/iepngfix.htc);}
 div#container {
-	min-height: 538px;
+	/* orignal height was 538px */
+	min-height: 564px;
 	height: auto !important;
-	height: 538px;
+	height: 564px;
 }
 div#sidebar {
-	min-height: 519px;
+	/* original height was 519px */
+	min-height: 545px;
 	height: auto !important;
-	height: 519px;
+	height: 545px;
 }
 div#header {
 	min-height: 61px;

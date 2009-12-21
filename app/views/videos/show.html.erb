@@ -32,7 +32,7 @@
 		<%= @video.date_filmed.year %>
 	</div>
 	<div id="description">
-		<%=h @video.description %>
+		<%= textilze_without_paragraph(@video.description) %>
 	</div>
 	<% unless @video.work.blank? %>
 		<div id="video_link">

@@ -45,14 +45,17 @@ body {
 div#container {
 	margin: 0 auto 26px auto;
 	padding-top: 10px;
-	width: 898px;
-	min-height: 538px;
+	/*width: 898px;
+	min-height: 538px; original bg image width and height */
+	width: 900px;
+	min-height: 564px;
 	position: relative;
 	
 }
 div#sidebar {
 	width: 126px;
-	min-height: 519px;
+	/*min-height: 519px; for original bg images */
+	min-height: 545px;
 	padding: 20px 25px 0 25px;
 	background: #fff;
 	text-align: left;
@@ -96,7 +99,8 @@ div#footer {
 .home-home div#sidebar {
 	position: absolute;
 	top: 0;
-	left: 140px;
+	/*left: 140px; original position*/
+	left: 60px;
 }
 .home-home div#page-container {
 	margin-left: 320px;
